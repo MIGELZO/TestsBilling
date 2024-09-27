@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Accets\american_express.gif" />
+    <None Remove="Accets\APPLEpay.gif" />
+    <None Remove="Accets\billing1.png" />
+    <None Remove="Accets\diners.gif" />
+    <None Remove="Accets\Gpay_Logo.png" />
+    <None Remove="Accets\Info_icon.svg.png" />
+    <None Remove="Accets\isracard.gif" />
+    <None Remove="Accets\mastercard.gif" />
+    <None Remove="Accets\PCI DSS.png" />
+    <None Remove="Accets\pciLogo.png" />
+    <None Remove="Accets\PurpleLogoSmall.png" />
+    <None Remove="Accets\visa.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Accets\american_express.gif" />
+    <Resource Include="Accets\APPLEpay.gif" />
+    <Resource Include="Accets\billing1.png" />
+    <Resource Include="Accets\diners.gif" />
+    <Resource Include="Accets\Gpay_Logo.png" />
+    <Resource Include="Accets\Info_icon.svg.png" />
+    <Resource Include="Accets\isracard.gif" />
+    <Resource Include="Accets\mastercard.gif" />
+    <Resource Include="Accets\PCI DSS.png" />
+    <Resource Include="Accets\pciLogo.png" />
+    <Resource Include="Accets\PurpleLogoSmall.png" />
+    <Resource Include="Accets\visa.gif" />
+  </ItemGroup>
+
+</Project>

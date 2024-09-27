@@ -1,0 +1,31 @@
+﻿<Application x:Class="kukiluli.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:kukiluli"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/ButtonResource.xaml"/>
+                <ResourceDictionary Source="/Resources/ButtonIconResource.xaml"/>
+                <ResourceDictionary Source="/Resources/TopButtonResource.xaml"/>
+                <ResourceDictionary Source="/Resources/SearchBarResource.xaml"/>
+                <ResourceDictionary Source="/Resources/WideButtonResource.xaml"/>
+                <ResourceDictionary Source="/Resources/TabButtonResource.xaml"/>
+                <ResourceDictionary Source="/Resources/FilterBarResource.xaml"/>
+                <ResourceDictionary Source="/Resources/MerchentImageResource.xaml"/>
+                <ResourceDictionary Source="/Resources/DataGridRowResource.xaml"/>
+                <ResourceDictionary Source="/Resources/DataGridColumnHeaderResource.xaml"/>
+                <ResourceDictionary Source="/Resources/DataGridCellResource.xaml"/>
+                <ResourceDictionary Source="/Resources/DataGridResource.xaml"/>
+                <ResourceDictionary Source="/Resources/GridShowButtonResource.xaml"/>
+                <ResourceDictionary Source="/Resources/GridDownloadButtonResource.xaml"/>
+                <ResourceDictionary Source="/Resources/GridButtonIconResource.xaml"/>
+                <ResourceDictionary Source="/Resources/HiddenStyleResource.xaml"/>
+                <ResourceDictionary Source="/Resources/VisibleStyleResource.xaml"/>
+                <ResourceDictionary Source="/Resources/TextBlockStyleResource.xaml"/>
+                <ResourceDictionary Source="/Resources/ComboBoxStyleResource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
