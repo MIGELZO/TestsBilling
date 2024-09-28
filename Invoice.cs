@@ -15,7 +15,9 @@
         public bool IsRefunded { get; set; }
         public string DealNumber { get; set; }
 
-        public Invoice(int invoiceID, int invoiceType, int customerID, Dictionary<int, int> items, decimal totalPrice)
+        public Invoice() { }
+
+        public Invoice(int invoiceID, int invoiceType, int customerID, Dictionary<int, int> items, decimal totalPrice, string? dealnumber)
         {
             InvoiceID = invoiceID;
             InvoiceType = invoiceType;
@@ -24,7 +26,7 @@
             TotalPrice = totalPrice;
             IsRefunded = false;
             Date = DateTime.Now;
-            DealNumber = "";
+            DealNumber = dealnumber ?? "";
         }
 
         public void UpdateDealNumber(string dealNumber)

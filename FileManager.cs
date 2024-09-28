@@ -13,20 +13,23 @@ namespace kukiluli
         {
             InitializeFromDataFile();
         }
-        public Customer CreateCustomer(int customerID, string customerName, string customerEmail, Invoice invoice)
+        // modify
+        public Customer CreateCustomer(int customerID, string customerName, string customerEmail, string phone, Invoice invoice)
         {
-            List<Customer>? customers = GetAllCustomers() ?? new List<Customer>();
-            Customer customer = new Customer(customerID, customerName, customerEmail, invoice);
+            List<Customer> customers = GetAllCustomers();
+            Customer customer = new Customer(customerID, customerName, customerEmail, phone, invoice);
             customers.Add(customer);
+
             File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
             CreateNewInvoice(invoice);
             return customer;
         }
 
+
         public Customer UpdateCustomer(int customerId, Invoice invoice)
         {
-            List<Customer> customers = GetAllCustomers() ?? new List<Customer>();
-            Customer? customer = customers.FirstOrDefault(c => c.CustomerID == customerId);
+            List<Customer> customers = GetAllCustomers();
+            Customer customer = customers.FirstOrDefault(c => c.CustomerID == customerId);
             customer.AddInvoice(invoice);
             File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
             CreateNewInvoice(invoice);
@@ -34,14 +37,19 @@ namespace kukiluli
 
         }
 
-        public List<Customer>? GetAllCustomers()
+        // modify
+        public List<Customer> GetAllCustomers()
         {
             try
             {
                 string jsonContent = File.ReadAllText(CustomersFilePath);
-                return JsonSerializer.Deserialize<List<Customer>>(jsonContent);
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                return JsonSerializer.Deserialize<List<Customer>>(jsonContent, options) ?? new List<Customer>();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new List<Customer>();
             }
@@ -89,13 +97,11 @@ namespace kukiluli
             List<Invoice> invoices = GetAllInvoices() ?? new List<Invoice>();
             return invoices.Where(i => i.InvoiceType == type).ToList();
         }
-
         public List<Invoice> GetAllInvoicesPerCustomer(int customerID)
         {
             List<Invoice> invoices = GetAllInvoices() ?? new List<Invoice>();
             return invoices.Where(i => i.CustomerID == customerID).ToList();
         }
-
         public List<Invoice> GetAllInvoicesPerCustomer(int customerID, int type)
         {
             List<Invoice> invoices = GetAllInvoices() ?? new List<Invoice>();
@@ -115,7 +121,6 @@ namespace kukiluli
             }
         }
 
-        // להוסיף item general - לטקסט חופשי
         public Item CreateItem(string name, decimal price)
         {
             List<Item> items = GetAllItems() ?? new List<Item>();
@@ -155,14 +160,22 @@ namespace kukiluli
             return Allinvoices.Where(i => i.CustomerID == customerId && i.Items.Keys.Contains(itemId)).ToList();
         }
 
+
+        // modify
         public void InitializeFromDataFile()
         {
+            if (!File.Exists(CustomersFilePath))
+            {
+                string CustomerInitialData = "[{\"CustomerID\":0,\"FullName\":\"General Customer\",\"Email\":\"MyLittleBusiness@daniel.com\",\"Phone\":\"0500000000\",\"Invoices\":[],\"Orders\":{}}]";
+                File.WriteAllText(CustomersFilePath, CustomerInitialData);
+            }
             if (!File.Exists(ItemsFilePath))
             {
                 string ItemsInitialData = "{\r\n  \"ItemId\": 0,\r\n  \"Name\": \"General Item\",\r\n  \"Price\": 0\r\n}";
-                string CustomerInitialData = "{\r\n  \"ItemId\": 0,\r\n  \"Name\": \"General Customers\",\r\n  \"Price\": 0\r\n}";
                 File.WriteAllText(ItemsFilePath, ItemsInitialData);
-                File.WriteAllText(CustomersFilePath, CustomerInitialData);
+            }
+            if (!File.Exists(CustomersFilePath))
+            {
                 File.WriteAllText(InvoicesFilePath, "");
             }
         }

@@ -42,7 +42,6 @@
     <Resource Include="Accets\DeleteIcon.png" />
     <Resource Include="Accets\diners.gif" />
     <Resource Include="Accets\ExitIcon.png" />
-    <Resource Include="Accets\ExitIcon2.png" />
     <Resource Include="Accets\Gpay_Logo.png" />
     <Resource Include="Accets\HomeIcon.png" />
     <Resource Include="Accets\Info_icon.svg.png" />

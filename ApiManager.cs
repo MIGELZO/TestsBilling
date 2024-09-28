@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Web;
 
 namespace kukiluli
 {
@@ -8,115 +10,179 @@ namespace kukiluli
     {
         public static HttpClient client = new HttpClient();
         private readonly string baseUrl = "https://secure.cardcom.solutions/Interface";
-        private readonly string? terminalNumber = Environment.GetEnvironmentVariable("TeminalNumber", EnvironmentVariableTarget.User);
+        private readonly string? terminalNumber = Environment.GetEnvironmentVariable("TerminalNumber", EnvironmentVariableTarget.User);
         private readonly string? username = Environment.GetEnvironmentVariable("UserName", EnvironmentVariableTarget.User);
         private readonly string? password = Environment.GetEnvironmentVariable("UserPassword", EnvironmentVariableTarget.User);
 
-        // Method to charge a card
-        public async Task<HttpResponseMessage> ChargeCard(decimal sum, string cardNumber, int cardValidityYear, int cardValidityMonth, string identityNumber, string language)
-        {
-            string url = $"{baseUrl}/Direct2.aspx?TerminalNumber={terminalNumber}&Sum={sum}&cardnumber={cardNumber}&cardvalidityyear={cardValidityYear}&cardvaliditymonth={cardValidityMonth}&identitynumber={identityNumber}&username={username}&Languages={language}";
-            return await client.PostAsync(url, null);
-        }
-
-        // Method to charge a card and create an invoice
-        public async Task<HttpResponseMessage> ChargeCardWithInvoice(decimal sum, string cardNumber, int cardValidityYear, int cardValidityMonth, string identityNumber, string customerName, string email, string itemDescription, decimal price, int quantity)
-        {
-            string url = $"{baseUrl}/Direct2.aspx?TerminalNumber={terminalNumber}&Sum={sum}&cardnumber={cardNumber}&cardvalidityyear={cardValidityYear}&cardvaliditymonth={cardValidityMonth}&identitynumber={identityNumber}&username={username}&Languages=he&InvoiceType=1&InvoiceHead.CustName={customerName}&InvoiceHead.SendByEmail=true&InvoiceHead.Language=he&InvoiceHead.Email={email}&InvoiceLines.Description={itemDescription}&InvoiceLines.Price={price}&InvoiceLines.Quantity={quantity}";
-            return await client.PostAsync(url, null);
-        }
-
         // Method to cancel a deal
-        public async Task<HttpResponseMessage> CancelDeal(int internalDealNumber, decimal? partialSum = null)
+        public string CancelDeal(int internalDealNumber, decimal? partialSum = null)
         {
             string url;
             if (partialSum != null)
             {
-                url = $"{baseUrl}/CancelDeal.aspx?TerminalNumber={terminalNumber}&name={username}&pass{password}&InternalDealNumber{internalDealNumber}&PartialSum{partialSum}";
-
+                url = $"{baseUrl}/CancelDeal.aspx?TerminalNumber={terminalNumber}&name={username}&pass={password}&InternalDealNumber={internalDealNumber}&PartialSum={partialSum}";
             }
             else
             {
-                url = $"{baseUrl}/CancelDeal.aspx?TerminalNumber={terminalNumber}&name={username}&pass{password}&InternalDealNumber{internalDealNumber}";
+                url = $"{baseUrl}/CancelDeal.aspx?TerminalNumber={terminalNumber}&name={username}&pass={password}&InternalDealNumber={internalDealNumber}";
             }
-            return await client.PostAsync(url, null);
-        }
 
-        // Method to create an invoice for an existing deal
-        public async Task<HttpResponseMessage> CreateInvoiceForExistingDeal(string customerName, string email, string itemDescription, decimal price, int quantity, string dealNumber)
-        {
-            string url = $"{baseUrl}/CreateInvoice.aspx?TerminalNumber={terminalNumber}&username={username}&InvoiceType=1&InvoiceHead.CustName={customerName}&InvoiceHead.SendByEmail=true&InvoiceHead.Language=he&InvoiceHead.Email={email}&InvoiceLines.Description={itemDescription}&InvoiceLines.Price={price}&InvoiceLines.Quantity={quantity}&CreditDealNum.DealNumber={dealNumber}";
-            return await client.PostAsync(url, null);
+            var response = client.PostAsync(url, null).Result; // Synchronously wait for the result
+            return response.Content.ReadAsStringAsync().Result; // Read response content
         }
 
         // Method to download a PDF of the document
-        public async Task<HttpResponseMessage> DownloadDocumentPDF(int documentNumber, int documentType, bool isOriginal)
+        public string DownloadDocumentPDF(int documentNumber, int documentType, bool isOriginal)
         {
             string url = $"{baseUrl}/GetDocumentPDF.aspx?UserName={username}&UserPassword={password}&DocumentNumber={documentNumber}&DocumentType={documentType}&IsOriginal={isOriginal}";
-            return await client.GetAsync(url);
+            var response = client.GetAsync(url).Result; // Synchronously wait for the result
+            return response.Content.ReadAsStringAsync().Result; // Read response content
         }
 
         // Method to download HTML of the invoice
-        public async Task<HttpResponseMessage> DownloadDocumentHTML(int invoiceNumber, int invoiceType, bool getAsOriginal)
+        public string DownloadDocumentHTML(int invoiceNumber, int invoiceType, bool getAsOriginal)
         {
             string url = $"{baseUrl}/InvoiceGetHtml.aspx?UserName={username}&UserPassword={password}&InvoiceNumber={invoiceNumber}&InvoiceType={invoiceType}&GetAsOriginal={getAsOriginal}";
-            return await client.GetAsync(url);
+            var response = client.GetAsync(url).Result; // Synchronously wait for the result
+            return response.Content.ReadAsStringAsync().Result; // Read response content
         }
 
         // Method to get invoice information
-        public async Task<HttpResponseMessage> GetInvoiceInfo(int invoiceNumber, int invoiceType)
+        public string GetInvoiceInfo(int invoiceNumber, int invoiceType)
         {
             string url = $"{baseUrl}/InvoiceGetInfo.aspx?username={username}&userpassword={password}&invoiceNumber={invoiceNumber}&invoiceType={invoiceType}";
-            return await client.GetAsync(url);
+            var response = client.GetAsync(url).Result; // Synchronously wait for the result
+            return response.Content.ReadAsStringAsync().Result; // Read response content
         }
 
         // Method to send an invoice copy to an email
-        public async Task<HttpResponseMessage> SendInvoiceToEmail(int invoiceNumber, int invoiceType, string emailAddress)
+        public string SendInvoiceToEmail(int invoiceNumber, int invoiceType, string emailAddress)
         {
             string url = $"{baseUrl}/SendInvoiceCopy.aspx?username={username}&userpassword={password}&InvoiceNumber={invoiceNumber}&invoiceType={invoiceType}&EmailAddress={emailAddress}";
-            return await client.GetAsync(url);
+            var response = client.GetAsync(url).Result; // Synchronously wait for the result
+            return response.Content.ReadAsStringAsync().Result; // Read response content
         }
 
         // Method to get customer details
-        public async Task<HttpResponseMessage> GetCustomerDetails(int accountId)
+        public string GetCustomerDetails(int accountId)
         {
             string url = $"{baseUrl}/GetAccount.aspx?TerminalNumber={terminalNumber}&UserName={username}&AccountID={accountId}";
-            return await client.GetAsync(url);
+            var response = client.GetAsync(url).Result; // Synchronously wait for the result
+            return response.Content.ReadAsStringAsync().Result; // Read response content
         }
-
 
         public bool CheckUserInformationExist()
         {
             return (username != null && password != null && terminalNumber != null);
         }
 
-        public async Task<HttpResponseMessage> CreateNewInvoice(int invoiceType, string customerName, string email, bool sendbyemail, string language, string ItemsDescription, decimal itemPrice, int quantity, int? cashPay = null, int? cardValidityMonth = null, int? cardValidityYear = null, int? identityNum = null, int? cardNumber = null, decimal? cardSum = null, List<Cheque>? cheques = null)
-        {
-            string url = $"{baseUrl}/CreateInvoice.aspx?TerminalNumber={terminalNumber}&UserName={username}&InvoiceType=0&InvoiceHead.CustName{customerName}&InvoiceHead.SendByEmail={sendbyemail}&InvoiceHead.Language{language}&InvoiceLines.Description{ItemsDescription}&InvoiceLines.Price{itemPrice}&InvoiceLines.Quantity{quantity}";
-            switch (invoiceType)
-            {
-                case 0:
-                    return await client.PostAsync(url, null);
-                case 1:
 
-                    if (cashPay != null) { url += $"&cash{cashPay}"; };
-                    if (cardNumber != null) { url += $"&cardnumber{cardNumber}&cardvalidityyear{cardValidityYear}&cardvaliditymonth{cardValidityMonth}&identitynumber{identityNum}&Sum{cardSum}"; };
-                    if (cheques != null)
-                    {
-                        string listCheques = FormatChequesForRequest(cheques);
-                        StringContent content = new StringContent(listCheques, Encoding.UTF8, "application/x-www-form-urlencoded");
-                        return await client.PostAsync(url, content);
-                    };
-                    return await client.PostAsync(url, null);
-                default:
-                    return await client.PostAsync(url, null);
+        // modify 26/09
+        public async Task<String> CreateNewInvoice(int invoiceType, string customerName, string email, string userMobile, bool sendByEmail, string language, List<Item> items, int? cashPay = null, int? cardValidityMonth = null, int? cardValidityYear = null, long? identityNum = null, long? cardNumber = null, int? securityCVV = null, int? paymentsAmount = null, decimal? cardSum = null, List<CustomPay>? customPays = null, List<Cheque>? cheques = null)
+        {
+            string urlTemp = "";
+            string? cancelDealNumber = "";
+            if (invoiceType == 1 && cardNumber == null)
+            {
+                urlTemp = $"{baseUrl}/CreateInvoice.aspx?";
             }
+            else if (invoiceType == 1 && cardNumber != null)
+            {
+                urlTemp = $"{baseUrl}/Direct2.aspx?";
+            }
+            else if (invoiceType == 2 && cardNumber == null)
+            {
+                urlTemp = $"{baseUrl}/CreateInvoice.aspx?";
+            }
+            else if (invoiceType == 2 && cardNumber != null)
+            {
+                string cardExipration = cardValidityMonth + "" + cardValidityYear;
+                cancelDealNumber = await RefundCreditCard(cardNumber, cardExipration, securityCVV, paymentsAmount, cardSum, customerName);
+                urlTemp = $"{baseUrl}/CreateInvoice.aspx?";
+            }
+            else
+            {
+                urlTemp = $"{baseUrl}/CreateInvoice.aspx?";
+            }
+
+            string url = $"{urlTemp}TerminalNumber={terminalNumber}&UserName={username}&InvoiceHead.CustMobilePH={userMobile}&InvoiceHead.Email={email}&InvoiceHead.IsAutoCreateUpdateAccount=true&InvoiceType={invoiceType}&InvoiceHead.CustName={customerName}&InvoiceHead.SendByEmail={sendByEmail}&InvoiceHead.Language={language}";
+            for (int i = 0; i < items.Count; i++)
+            {
+                var item = items[i];
+                string prefix = i == 0 ? "InvoiceLines" : $"InvoiceLines{i}";
+                url += $"&{prefix}.Description={item.Name}&{prefix}.Price={item.Price}&{prefix}.Quantity={item.Quantity}";
+            }
+            if (invoiceType == 1 || invoiceType == 2)
+            {
+                if (cashPay != null) { url += $"&cash={cashPay}"; }
+                if (cardNumber != null && invoiceType == 1)
+                {
+                    url += $"&cardnumber={cardNumber}&Cvv={securityCVV}&cardvalidityyear={cardValidityYear}&cardvaliditymonth={cardValidityMonth}&identitynumber={identityNum}&Sum={cardSum}&NumOfPayments={paymentsAmount}";
+                }
+                else if (cardNumber != null && invoiceType == 2)
+                {
+                    url += $"CreditDealNum.DealNumber{cancelDealNumber}";
+                }
+                if (customPays != null)
+                {
+                    url += $"&CustomPay.TransactionID={customPays[0].TransactionID}&CustomPay.TranDate={customPays[0].TranDate}&CustomPay.Description={customPays[0].Description}&CustomPay.Asmacta={customPays[0].Asmacta}&CustomPay.Sum={customPays[0].Sum}";
+                    if (customPays.Count == 2)
+                    {
+                        url += $"&CustomPay1.TransactionID={customPays[1].TransactionID}&CustomPay1.TranDate={customPays[1].TranDate}&CustomPay1.Description={customPays[1].Description}&CustomPay1.Asmacta={customPays[1].Asmacta}&CustomPay1.Sum={customPays[1].Sum}";
+                    }
+                }
+                if (cheques != null)
+                {
+                    string listCheques = FormatChequesForRequest(cheques);
+                    StringContent content = new StringContent(listCheques, Encoding.UTF8, "application/x-www-form-urlencoded");
+                    var response = client.PostAsync(url, content).Result; // Synchronously wait for the result
+                    return response.Content.ReadAsStringAsync().Result; // Read response content
+                }
+            }
+
+            var defaultResponse = client.PostAsync(url, null).Result;
+            return defaultResponse.Content.ReadAsStringAsync().Result; // Read response content
         }
 
-        public async Task<HttpResponseMessage> GetInvoiceDetails(int invoiceId, int invoiceType)
+        public string GetInvoiceDetails(int invoiceId, int invoiceType)
         {
-            string url = $"{baseUrl}/CreateInvoice.aspx?UserPassword={password}&UserName={username}&invoiceNumber{invoiceId}&invoiceType{invoiceType}";
-            return await client.GetAsync(url);
+            string url = $"{baseUrl}/CreateInvoice.aspx?UserPassword={password}&UserName={username}&invoiceNumber={invoiceId}&invoiceType={invoiceType}";
+            var response = client.GetAsync(url).Result; // Synchronously wait for the result
+            return response.Content.ReadAsStringAsync().Result; // Read response content
+        }
+
+        public async Task<string> RefundCreditCard(long? cardNum, string cardExpiration, int? cvv, int? paymentCount, decimal? amount, string fullName)
+        {
+            var requestBody = new
+            {
+                TerminalNumber = terminalNumber,
+                ApiName = username,
+                Amount = amount,
+                CardNumber = cardNum,
+                CardExpirationMMYY = cardExpiration,
+                CVV2 = cvv,
+                NumOfPayments = paymentCount,
+                CardOwnerInformation = new
+                {
+                    FullName = fullName
+                },
+                ISOCoinId = 1,
+                Advanced = new
+                {
+                    ApiPassword = password,
+                    IsRefund = true
+                }
+            };
+
+            string json = JsonSerializer.Serialize(requestBody);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            string url = "https://secure.cardcom.solutions/api/v11/Transactions/Transaction";
+            var response = await client.PostAsync(url, content);
+            response.EnsureSuccessStatusCode();
+            string responseData = await response.Content.ReadAsStringAsync();
+            var responseObject = JsonSerializer.Deserialize<JsonElement>(responseData);
+            string dealNumber = responseObject.GetProperty("TranzactionId").GetInt64().ToString();
+            return dealNumber;
         }
 
         public string FormatChequesForRequest(List<Cheque> cheques)
@@ -136,5 +202,22 @@ namespace kukiluli
 
             return string.Join("&", queryString);
         }
+
+        // modify - need to move to mainwindow.cs 26/09
+        // need to check if there is a deal number or not 
+        public Dictionary<string, string?> ParseResponseOfChargeInvoice(string response)
+        {
+            var parsedResponse = HttpUtility.ParseQueryString(response);
+            Dictionary<string, string?> extractedValues = new Dictionary<string, string?>
+     {
+         { "InvoiceID", parsedResponse["InvoiceResponse.InvoiceNumber"] },
+         { "DealNumber", parsedResponse["InternalDealNumber"] },
+         { "ResponseCode", parsedResponse["InvoiceResponse.ResponseCode"] },
+         { "CustomerID", parsedResponse["InvoiceResponse.AccountID"] }
+     };
+
+            return extractedValues;
+        }
+
     }
 }
