@@ -12,7 +12,7 @@ namespace kukiluli
             InitializeComponent();
         }
 
-        private void Button_ClickChargeNOrder(object sender, RoutedEventArgs e)
+        private void Button_Click_ManuNav(object sender, RoutedEventArgs e)
         {
             RadioButton clickedButton = sender as RadioButton;
             Style HiddenStyle = (Style)FindResource("HiddenStyle");
@@ -28,9 +28,7 @@ namespace kukiluli
                             ReportsTabMenu.Visibility = Visibility.Hidden;
                             ItemsTabMenu.Visibility = Visibility.Hidden;
 
-                            FilterBar.Style = HiddenStyle;
-                            DataTable.Style = HiddenStyle;
-                            ChargingScreen.Style = VisibleStyle;
+                            chargeBUT.IsChecked = true;
                             break;
                         }
                     case "reportsBUT":
@@ -39,9 +37,11 @@ namespace kukiluli
                             ReportsTabMenu.Visibility = Visibility.Visible;
                             ItemsTabMenu.Visibility = Visibility.Hidden;
 
+                            //all doc = checked instead of ▼
+                            RefundHeadTitle.Style = HiddenStyle;
+                            OrderCreationScreen.Style = HiddenStyle;
                             ChargingScreen.Style = HiddenStyle;
-                            FilterBar.Style = VisibleStyle;
-                            DataTable.Style = VisibleStyle;
+                            ReportsTable.Style = VisibleStyle;
                             break;
                         }
                     case "itemsBUT":
@@ -50,9 +50,11 @@ namespace kukiluli
                             ReportsTabMenu.Visibility = Visibility.Hidden;
                             ItemsTabMenu.Visibility = Visibility.Visible;
 
+                            //all prod = checked - instead of ▼
+                            RefundHeadTitle.Style = HiddenStyle;
+                            OrderCreationScreen.Style = HiddenStyle;
                             ChargingScreen.Style = HiddenStyle;
-                            FilterBar.Style = VisibleStyle;
-                            DataTable.Style = VisibleStyle;
+                            ReportsTable.Style = VisibleStyle;
                             break;
                         }
                 }
@@ -120,9 +122,52 @@ namespace kukiluli
             }
         }
 
+
+        private void Button_Click_ChargeTabNav(object sender, RoutedEventArgs e)
+        {
+            RadioButton clickedButton = sender as RadioButton;
+            Style HiddenStyle = (Style)FindResource("HiddenStyle");
+            Style VisibleStyle = (Style)FindResource("VisibleStyle");
+
+            if (clickedButton != null)
+            {
+                switch (clickedButton.Name)
+                {
+                    case "chargeBUT":
+                        {
+                            if (CashForm == null) { break; }
+
+                            ChargingScreen.Style = VisibleStyle;
+                            RefundHeadTitle.Style = HiddenStyle;
+                            ReportsTable.Style = HiddenStyle;
+                            OrderCreationScreen.Style = HiddenStyle;
+                            break;
+                        }
+                    case "refundBUT":
+                        {
+                            RefundHeadTitle.Style = VisibleStyle;
+                            ReportsTable.Style = VisibleStyle;
+                            ChargingScreen.Style = HiddenStyle;
+                            OrderCreationScreen.Style = HiddenStyle;
+                            break;
+                        }
+                    case "orderBUT":
+                        {
+                            OrderCreationScreen.Style = VisibleStyle;
+                            RefundHeadTitle.Style = HiddenStyle;
+                            ReportsTable.Style = HiddenStyle;
+                            ChargingScreen.Style = HiddenStyle;
+
+                            break;
+                        }
+                }
+            }
+        }
+
         private void RadioButton_ExitApp(object sender, RoutedEventArgs e)
         {
             // navigate out to home
         }
+
     }
 }

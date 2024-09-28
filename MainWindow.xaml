@@ -11,11 +11,11 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
-    
+
     <Border Background="#eff2f7" CornerRadius="30" >
-        
+
         <!--Left Manu grid-->
-        
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -29,7 +29,7 @@
                 </Grid.RowDefinitions>
 
                 <Button HorizontalAlignment="Left" Margin="20 28 0 35" Style="{StaticResource TopButton}">
-                    <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" />
+                    <Image Source="\Accets\HomeIcon.png" Width="15" Height="15" />
                 </Button>
 
                 <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
@@ -38,7 +38,7 @@
                             DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
                             <Ellipse>
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="Accets\PurpleLogoSmall.png"/>
+                                    <ImageBrush ImageSource="Accets\PurpleLogoSmall.png" />
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Border>
@@ -51,23 +51,23 @@
                         <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
 
                         <StackPanel DockPanel.Dock="Top">
-                            <RadioButton x:Name="chargingBUT" Style="{StaticResource ManuButton}" Click="Button_ClickChargeNOrder">
+                            <RadioButton x:Name="chargingBUT" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource MenuButtonIcon}"/>
+                                    <Image Source="\Accets\CreditCardIcon.png" Style="{StaticResource MenuButtonIcon}"/>
                                     <TextBlock Text="Charge / Order"/>
                                 </StackPanel>
                             </RadioButton>
 
-                            <RadioButton x:Name="reportsBUT" Style="{StaticResource ManuButton}" Click="Button_ClickChargeNOrder">
+                            <RadioButton x:Name="reportsBUT" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource MenuButtonIcon}"/>
+                                    <Image Source="\Accets\InvoiceIcon.png" Style="{StaticResource MenuButtonIcon}"/>
                                     <TextBlock Text="Reports"/>
                                 </StackPanel>
                             </RadioButton>
 
-                            <RadioButton x:Name="itemsBUT" Style="{StaticResource ManuButton}" Click="Button_ClickChargeNOrder">
+                            <RadioButton x:Name="itemsBUT" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource MenuButtonIcon}"/>
+                                    <Image Source="\Accets\CartIcon.png" Style="{StaticResource MenuButtonIcon}"/>
                                     <TextBlock Text="Items"/>
                                 </StackPanel>
                             </RadioButton>
@@ -75,7 +75,7 @@
 
                         <RadioButton Style="{StaticResource ManuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Checked="RadioButton_ExitApp">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource MenuButtonIcon}"/>
+                                <Image Source="\Accets\ExitIcon.png" Style="{StaticResource MenuButtonIcon}"/>
                                 <TextBlock Text="Exit App"/>
                             </StackPanel>
                         </RadioButton>
@@ -84,7 +84,7 @@
             </Grid>
 
             <!--Main Center Grid-->
-            
+
             <Grid Grid.Column="1" Margin="30 20 20 20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -100,22 +100,22 @@
                     <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
                                Panel.ZIndex="1" Text="Test Terminal 1001"/>
                 </Grid>
-                
-                <Button Style="{StaticResource TopButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" />
+
+                <Button Style="{StaticResource TopButton}" Margin="0 0 20 0" HorizontalAlignment="Right">
+                    <Image Source="\Accets\SettingsIcon.png" Width="15" Height="15" />
                 </Button>
-                
+
                 <TextBlock Text="Head Title" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121518"/>
 
                 <!--Top Center Manu-->
-                
-                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
-                
+
+                <Separator Height="1" Grid.Row="3" Margin="0 -1 0 10"/>
+
                 <StackPanel x:Name="ChargesNOrdersTabMenu" Visibility="Visible" Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
-                    <RadioButton Content="Charge+Invoice" Style="{StaticResource TabButton}" IsChecked="True"/>
-                    <RadioButton Content="Refund Deal" Style="{StaticResource TabButton}"/>
-                    <RadioButton Content="Create Order" Style="{StaticResource TabButton}"/>
+                    <RadioButton x:Name="chargeBUT" Content="Charge+Invoice" Style="{StaticResource TabButton}" IsChecked="True" Checked="Button_Click_ChargeTabNav"/>
+                    <RadioButton x:Name="refundBUT" Content="Refund Deal" Style="{StaticResource TabButton}" Checked="Button_Click_ChargeTabNav"/>
+                    <RadioButton x:Name="orderBUT" Content="Create Order" Style="{StaticResource TabButton}" Checked="Button_Click_ChargeTabNav"/>
                 </StackPanel>
                 <StackPanel x:Name="ReportsTabMenu" Visibility="Hidden" Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
                     <RadioButton Content="all doc" Style="{StaticResource TabButton}" IsChecked="True"/>
@@ -129,8 +129,8 @@
                 </StackPanel>
 
                 <!--Charging / Orders Screen-->
-                
-                <Grid x:Name="ChargingScreen" Grid.Row="5">
+
+                <Grid x:Name="ChargingScreen" Grid.Row="5" Style="{StaticResource VisibleStyle}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -144,27 +144,32 @@
 
                     <Grid Grid.Row="0" Margin="0 0 0 10">
                         <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Text="Customer Details" HorizontalAlignment="Center" Margin="0 0 0 10" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text="Choose Action :" Grid.Row="0" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5 0 0 10" Style="{StaticResource TextBlockStyle}"/>
+                        <StackPanel x:Name="qw" Visibility="Visible" Grid.Row="0" Orientation="Horizontal" Margin="120 0 0 10">
+                            <RadioButton Content="Charge ▲" Foreground="Green" Style="{StaticResource TabButton}" IsChecked="True"/>
+                            <RadioButton Content="Refund ▼" Foreground="Red" Style="{StaticResource TabButton}"/>
+                        </StackPanel>
+                        <TextBlock Grid.Row="0" Text="Customer Details" HorizontalAlignment="Center" Margin="0 0 0 10" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
 
-                            <Grid Grid.Row="1" Margin="40 0 40 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="1" Margin="40 0 40 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Name *" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Phone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                            </Grid>
-                            <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
+                            <TextBlock Text="Name *" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Phone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                        </Grid>
+                        <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
 
                         <Grid Grid.Row="3" Margin="40 0 40 0">
                             <Grid.ColumnDefinitions>
@@ -184,67 +189,67 @@
 
                     <Grid Grid.Row="1" Margin="0 0 0 10">
                         <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Text="Items:" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Grid.Row="0" Text="Items:" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
 
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="15*"/>
-                                    <ColumnDefinition Width="6*"/>
-                                    <ColumnDefinition Width="4*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" Background="#dcdcdc" HorizontalAlignment="Left">
-                                    <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" />
-                                </Button>
-                                <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Description" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Price" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Total Price" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                            </Grid>
-                            <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
+                            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
+                                <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
+                            </Button>
+                            <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Description" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Price" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Total Price" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                        </Grid>
+                        <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
 
-                            <Grid Grid.Row="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="15*"/>
-                                    <ColumnDefinition Width="6*"/>
-                                    <ColumnDefinition Width="4*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" Background="#dcdcdc" HorizontalAlignment="Left">
-                                    <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" />
-                                </Button>
-                                <TextBox x:Name="test4" Grid.Column="1" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test5" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test6" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test7" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test8" Grid.Column="5" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                            </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
+                                <Image Source="\Accets\DeleteIcon.png" Width="15" Height="15" />
+                            </Button>
+                            <TextBox x:Name="test4" Grid.Column="1" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test5" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test6" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test7" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test8" Grid.Column="5" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                        </Grid>
 
-                            <Grid Grid.Row="4">
+                        <Grid Grid.Row="4">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                                <TextBlock Text="Total sum: " Grid.Row="0" HorizontalAlignment="Right" Margin="10 15 90 0" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBox x:Name="test3" Grid.Row="1" HorizontalAlignment="Right" Width="150" Margin="10 5 8 0" Style="{StaticResource TextBoxFilterBar}"/>
-                            </Grid>
-                            <Separator Grid.Row="5" Height="10" Background="#784ff2" Margin="0 5 0 10"/>
+                            <TextBlock Text="Total sum: " Grid.Row="0" HorizontalAlignment="Right" Margin="10 15 90 0" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBox x:Name="test3" Grid.Row="1" HorizontalAlignment="Right" Width="150" Margin="10 5 8 0" Style="{StaticResource TextBoxFilterBar}"/>
+                        </Grid>
+                        <Separator Grid.Row="5" Height="10" Background="#784ff2" Margin="0 5 0 10"/>
                     </Grid>
-                    
+
                     <!--Payment Method Bar-->
 
                     <Grid Grid.Row="2" Margin="0 20 0 30">
@@ -252,7 +257,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
+
                         <TextBlock Grid.Row="0" Text="Payment Method" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
                         <StackPanel x:Name="CashPayment" Grid.Row="1" Orientation="Horizontal" Margin="0 10 0 0">
                             <RadioButton x:Name="cashBUT" Content="Cash" Style="{StaticResource TabButton}" IsChecked="True" Checked="ButtonClick_PayMethods"/>
@@ -262,7 +267,7 @@
                             <RadioButton x:Name="bitBUT" Content="Bit" Style="{StaticResource TabButton}" Checked="ButtonClick_PayMethods"/>
                         </StackPanel>
                     </Grid>
-                    
+
                     <!--Cash Form-->
 
                     <Grid x:Name="CashForm" Grid.Row="3" Margin="40 0 0 0" Style="{StaticResource VisibleStyle}">
@@ -274,7 +279,7 @@
                         <TextBlock Text="Cash amount: " Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                         <TextBox x:Name="test9" Grid.Column="1" Width="150" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
                     </Grid>
-                    
+
                     <!--Credit Card Form-->
 
                     <Grid x:Name="CreditCaForm" Grid.Row="3" Style="{StaticResource HiddenStyle}">
@@ -285,7 +290,7 @@
                         </Grid.RowDefinitions>
 
 
-                            <Grid Grid.Row="0" Margin="20 0 20 0">
+                        <Grid Grid.Row="0" Margin="20 0 20 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -293,99 +298,99 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Card Number: *" Grid.Column="0" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Expiration Date:" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Security Digits:" Grid.Column="2" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
-                                <Image Source="/Accets/Info_icon.svg.png" Grid.Column="2" Width="15" Height="15" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="150,0,0,0"/>
-                                <TextBlock Text="Card Owner's ID (IL only):" Grid.Column="3" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Card Owner Name:" Grid.Column="4" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Payments:" Grid.Column="5" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
-                            </Grid>
-                            <Separator Height="1" Grid.Row="1"  Background="#dae2ea" Margin="0 2 0 10"/>
+                            <TextBlock Text="Card Number: *" Grid.Column="0" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Expiration Date:" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Security Digits:" Grid.Column="2" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
+                            <Image Source="/Accets/Info_icon.svg.png" Grid.Column="2" Width="15" Height="15" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="150,0,0,0"/>
+                            <TextBlock Text="Card Owner's ID (IL only):" Grid.Column="3" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Card Owner Name:" Grid.Column="4" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Payments:" Grid.Column="5" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
+                        </Grid>
+                        <Separator Height="1" Grid.Row="1"  Background="#dae2ea" Margin="0 2 0 10"/>
 
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <TextBox x:Name="test10" Grid.Column="0" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
-                                    <ComboBox x:Name="test11" Width="100" Margin="5" Style="{StaticResource ComboBoxStyle}">
-                                        <ComboBoxItem Content="2024"/>
-                                    </ComboBox>
-                                    <ComboBox x:Name="test12" Width="60" Margin="5" Style="{StaticResource ComboBoxStyle}">
-                                        <ComboBoxItem Content="1"/>
-                                    </ComboBox>
-                                </StackPanel>
-                                <TextBox x:Name="test13" Grid.Column="2" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test14" Grid.Column="3" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test15" Grid.Column="4" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
-                                <ComboBox x:Name="test16" Grid.Column="5" Width="60" Margin="10" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyle}">
+                            <TextBox x:Name="test10" Grid.Column="0" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
+                                <ComboBox x:Name="test11" Width="100" Margin="5" Style="{StaticResource ComboBoxStyle}">
+                                    <ComboBoxItem Content="2024"/>
+                                </ComboBox>
+                                <ComboBox x:Name="test12" Width="60" Margin="5" Style="{StaticResource ComboBoxStyle}">
                                     <ComboBoxItem Content="1"/>
                                 </ComboBox>
-                            </Grid>
+                            </StackPanel>
+                            <TextBox x:Name="test13" Grid.Column="2" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test14" Grid.Column="3" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test15" Grid.Column="4" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
+                            <ComboBox x:Name="test16" Grid.Column="5" Width="60" Margin="10" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyle}">
+                                <ComboBoxItem Content="1"/>
+                            </ComboBox>
+                        </Grid>
                     </Grid>
 
                     <!--Cheque Form-->
 
                     <Grid x:Name="ChequeForm" Grid.Row="3" Style="{StaticResource HiddenStyle}">
                         <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource TopButton}" Background="#dcdcdc" HorizontalAlignment="Left">
-                                    <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" />
-                                </Button>
+                            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
+                                <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
+                            </Button>
                             <TextBlock Text="Account number" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             <TextBlock Text="Branch number" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Bank number" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Cheque number" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Date" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Cheque amount" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                            </Grid>
-                            <Separator Height="1" Grid.Row="1"  Background="#dae2ea" Margin="0 2 0 10"/>
-
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" Background="#dcdcdc" HorizontalAlignment="Left">
-                                    <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" />
-                                </Button>
-                                <TextBox x:Name="test17" Grid.Column="1" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test18" Grid.Column="2" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test19" Grid.Column="3" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test20" Grid.Column="4" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test21" Grid.Column="5" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                <TextBox x:Name="test22" Grid.Column="6" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
-                            </Grid>
+                            <TextBlock Text="Bank number" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Cheque number" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Date" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Cheque amount" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                         </Grid>
+                        <Separator Height="1" Grid.Row="1"  Background="#dae2ea" Margin="0 2 0 10"/>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}"  HorizontalAlignment="Left">
+                                <Image Source="\Accets\DeleteIcon.png" Width="15" Height="15" />
+                            </Button>
+                            <TextBox x:Name="test17" Grid.Column="1" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test18" Grid.Column="2" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test19" Grid.Column="3" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test20" Grid.Column="4" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test21" Grid.Column="5" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test22" Grid.Column="6" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
+                        </Grid>
+                    </Grid>
 
                     <!--Bank Transfert Form-->
 
@@ -416,7 +421,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <TextBox x:Name="test23" Grid.Column="0" Margin="5 0 100 0" Style="{StaticResource TextBoxFilterBar}"/>
                             <TextBox x:Name="test24" Grid.Column="1" Margin="5 0 100 0" Style="{StaticResource TextBoxFilterBar}"/>
                             <TextBox x:Name="test25" Grid.Column="2" Margin="5 0 100 0" Style="{StaticResource TextBoxFilterBar}"/>
@@ -469,78 +474,212 @@
                     </Grid>
                 </Grid>
 
-                    <!--Reports Screen-->
-                
-                <Grid x:Name="FilterBar" Grid.Row="4" Style="{StaticResource HiddenStyle}">
-                    <TextBlock Text="PlaceHolder" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
-                               Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    
-                    <TextBlock Text="Filter By" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin=" 0 0 215 0"
-                               Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <!--Refund Screen-->
 
+                <Grid x:Name="RefundHeadTitle" Grid.Row="4" Style="{StaticResource HiddenStyle}">
+                    <TextBlock Text="Refund Existing Deal" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+                </Grid>
 
-                    <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
-                        <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                                   Panel.ZIndex="1" Text="Searce Here..."
-                                   Visibility="{Binding ElementName=txtFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                <!--Order Creation Screen-->
 
-                        <TextBox x:Name="txtFilter" Style="{StaticResource TextBoxFilterBar}"/>
+                <Grid x:Name="OrderCreationScreen" Grid.Row="5" Style="{StaticResource HiddenStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                        <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" VerticalAlignment="Center"
-                               Margin="0 0 15 0" HorizontalAlignment="Right"/>
+                    <TextBlock Grid.Row="0" Text="Order Creation" HorizontalAlignment="Center" Margin="0 0 0 30" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+
+                    <!--Order Form-->
+
+                    <Grid Grid.Row="1" Margin="0 0 0 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Customer Details" HorizontalAlignment="Center" Margin="0 0 0 10" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+
+                        <Grid Grid.Row="1" Margin="40 0 40 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Name *" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Phone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                        </Grid>
+                        <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
+
+                        <Grid Grid.Row="3" Margin="40 0 40 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="test29" Grid.Column="0" Margin="5 0 150 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test30" Grid.Column="1" Margin="5 0 150 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test31" Grid.Column="2" Margin="5 0 150 0" Style="{StaticResource TextBoxFilterBar}"/>
+                        </Grid>
+                        <Separator Grid.Row="4" Height="10" Background="#784ff2" Margin="0 5 0 5"/>
+                    </Grid>
+
+                    <!--Order Product Section-->
+
+                    <Grid Grid.Row="2" Margin="0 0 0 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Items:" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
+                                <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
+                            </Button>
+                            <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Description" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Price" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Total Price" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                        </Grid>
+                        <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
+
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
+                                <Image Source="\Accets\DeleteIcon.png" Width="15" Height="15" />
+                            </Button>
+                            <TextBox x:Name="test32" Grid.Column="1" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test33" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test34" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test35" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                            <TextBox x:Name="test36" Grid.Column="5" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                        </Grid>
+
+                        <Grid Grid.Row="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Total sum: " Grid.Row="0" HorizontalAlignment="Right" Margin="10 15 90 0" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBox x:Name="test37" Grid.Row="1" HorizontalAlignment="Right" Width="150" Margin="10 5 8 0" Style="{StaticResource TextBoxFilterBar}"/>
+                        </Grid>
+                        <Separator Grid.Row="5" Height="10" Background="#784ff2" Margin="0 5 0 10"/>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Button Content="Create Order" HorizontalAlignment="Center" Style="{StaticResource WideButton}"/>
                     </Grid>
                 </Grid>
 
+                <!--Reports Structure-->
 
-                <Grid x:Name="DataTable" Grid.Row="5" Style="{StaticResource HiddenStyle}">
-                    <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
-                        <DataGrid.Columns>
-                            <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
-                                <DataGridCheckBoxColumn.HeaderTemplate>
-                                    <DataTemplate>
-                                        <CheckBox/>
-                                    </DataTemplate>
-                                </DataGridCheckBoxColumn.HeaderTemplate>
-                            </DataGridCheckBoxColumn>
+                <Grid x:Name="ReportsTable" Grid.Row="5" Style="{StaticResource HiddenStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                            <DataGridTextColumn Header="#" IsReadOnly="True"  CanUserResize="False" Width="auto"/>
+                    <Grid x:Name="FilterBar" Grid.Row="0">
+                        <TextBlock Text="PlaceHolder" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
+               Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                            <DataGridTemplateColumn Header="PlaceHolder" IsReadOnly="False" Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
-                                                <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
-                                            </Border>
+                        <TextBlock Text="Filter By" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin=" 0 0 215 0"
+               Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-                                            <TextBlock Text="..." VerticalAlignment="Center"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
 
-                            <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
-                            <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
-                            <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
+                        <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
+                            <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                   Panel.ZIndex="1" Text="Searce Here..."
+                   Visibility="{Binding ElementName=txtFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
 
-                            <DataGridTemplateColumn Header="PlaceHolder" IsReadOnly="False" Width="auto">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Style="{StaticResource GridShowButton}">
-                                                <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource GridImageIcon}"/>
-                                            </Button>
-                                            <Button Style="{StaticResource GridDownloadButton}" Margin="5 0 0 0">
-                                                <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource GridImageIcon}"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                            <TextBox x:Name="txtFilter" Style="{StaticResource TextBoxFilterBar}"/>
+
+                            <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" VerticalAlignment="Center"
+               Margin="0 0 15 0" HorizontalAlignment="Right"/>
+                        </Grid>
+                    </Grid>
+
+
+                    <Grid x:Name="DataTable" Grid.Row="1">
+                        <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
+                                    <DataGridCheckBoxColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <CheckBox/>
+                                        </DataTemplate>
+                                    </DataGridCheckBoxColumn.HeaderTemplate>
+                                </DataGridCheckBoxColumn>
+
+                                <DataGridTextColumn Header="#" IsReadOnly="True"  CanUserResize="False" Width="auto"/>
+
+                                <DataGridTemplateColumn Header="PlaceHolder" IsReadOnly="False" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
+                                                    <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                                </Border>
+
+                                                <TextBlock Text="..." VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
+                                <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
+                                <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
+
+                                <DataGridTemplateColumn Header="PlaceHolder" IsReadOnly="False" Width="auto">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Style="{StaticResource GridShowButton}">
+                                                    <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource GridImageIcon}"/>
+                                                </Button>
+                                                <Button Style="{StaticResource GridDownloadButton}" Margin="5 0 0 0">
+                                                    <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource GridImageIcon}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </Grid>
-                
+
                 <!--Footer-->
 
                 <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
@@ -555,11 +694,11 @@
                         <Image Source="\Accets\isracard.gif" Style="{StaticResource MerchentStyle}"/>
                     </StackPanel>
                 </Border>
-                
-                
-                
+
+
+
             </Grid>
-            
+
 
         </Grid>
     </Border>

@@ -9,32 +9,50 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Accets\AddLineIcon.png" />
     <None Remove="Accets\american_express.gif" />
     <None Remove="Accets\APPLEpay.gif" />
     <None Remove="Accets\billing1.png" />
+    <None Remove="Accets\CartIcon.png" />
+    <None Remove="Accets\CreditCardIcon.png" />
+    <None Remove="Accets\DeleteIcon.png" />
     <None Remove="Accets\diners.gif" />
+    <None Remove="Accets\ExitIcon.png" />
+    <None Remove="Accets\ExitIcon2.png" />
     <None Remove="Accets\Gpay_Logo.png" />
+    <None Remove="Accets\HomeIcon.png" />
     <None Remove="Accets\Info_icon.svg.png" />
+    <None Remove="Accets\InvoiceIcon.png" />
     <None Remove="Accets\isracard.gif" />
     <None Remove="Accets\mastercard.gif" />
     <None Remove="Accets\PCI DSS.png" />
     <None Remove="Accets\pciLogo.png" />
     <None Remove="Accets\PurpleLogoSmall.png" />
+    <None Remove="Accets\SettingsIcon.png" />
     <None Remove="Accets\visa.gif" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Accets\AddLineIcon.png" />
     <Resource Include="Accets\american_express.gif" />
     <Resource Include="Accets\APPLEpay.gif" />
     <Resource Include="Accets\billing1.png" />
+    <Resource Include="Accets\CartIcon.png" />
+    <Resource Include="Accets\CreditCardIcon.png" />
+    <Resource Include="Accets\DeleteIcon.png" />
     <Resource Include="Accets\diners.gif" />
+    <Resource Include="Accets\ExitIcon.png" />
+    <Resource Include="Accets\ExitIcon2.png" />
     <Resource Include="Accets\Gpay_Logo.png" />
+    <Resource Include="Accets\HomeIcon.png" />
     <Resource Include="Accets\Info_icon.svg.png" />
+    <Resource Include="Accets\InvoiceIcon.png" />
     <Resource Include="Accets\isracard.gif" />
     <Resource Include="Accets\mastercard.gif" />
     <Resource Include="Accets\PCI DSS.png" />
     <Resource Include="Accets\pciLogo.png" />
     <Resource Include="Accets\PurpleLogoSmall.png" />
+    <Resource Include="Accets\SettingsIcon.png" />
     <Resource Include="Accets\visa.gif" />
   </ItemGroup>
 
