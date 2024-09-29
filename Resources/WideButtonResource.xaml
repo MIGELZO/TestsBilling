@@ -25,6 +25,10 @@
                 <Setter Property="Background" Value="#7b5cd6"/>
                 <Setter Property="Foreground" Value="#ffffff"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#574f6e"/>
+                <Setter Property="Foreground" Value="#ffffff"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

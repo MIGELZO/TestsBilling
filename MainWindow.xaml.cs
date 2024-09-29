@@ -301,14 +301,16 @@ namespace kukiluli
             newProductLine.Children.Add(descriptionTextBox);
 
             TextBox priceTextBox = new TextBox { Name = $"{kind}prodPrice", Margin = new Thickness(5, 0, 5, 0), Style = (Style)FindResource("TextBoxFilterBar") };
+            priceTextBox.TextChanged += InvoiceLine_TextChanged;
             Grid.SetColumn(priceTextBox, 3);
             newProductLine.Children.Add(priceTextBox);
 
-            TextBox quantityTextBox = new TextBox { Name = $"{kind}prodQuantity", Margin = new Thickness(5, 0, 5, 0), Style = (Style)FindResource("TextBoxFilterBar") };
+            TextBox quantityTextBox = new TextBox { Name = $"{kind}prodQuantity", Text = "1", Margin = new Thickness(5, 0, 5, 0), Style = (Style)FindResource("TextBoxFilterBar") };
+            quantityTextBox.TextChanged += InvoiceLine_TextChanged;
             Grid.SetColumn(quantityTextBox, 4);
             newProductLine.Children.Add(quantityTextBox);
 
-            TextBox totalPriceTextBox = new TextBox { Name = $"{kind}prodTotalPrice", Margin = new Thickness(5, 0, 5, 0), IsReadOnly = true, Style = (Style)FindResource("TextBoxFilterBar") };
+            TextBox totalPriceTextBox = new TextBox { Name = $"{kind}prodTotalPrice", Text = "0.00", Margin = new Thickness(5, 0, 5, 0), IsReadOnly = true, Style = (Style)FindResource("TextBoxFilterBar") };
             Grid.SetColumn(totalPriceTextBox, 5);
             newProductLine.Children.Add(totalPriceTextBox);
 
@@ -340,6 +342,7 @@ namespace kukiluli
 
             // Remove the corresponding RowDefinition
             lines.RowDefinitions.RemoveAt(rowIndex);
+            UpdateInvoiceTotalPrice();
         }
 
         private void Button_ClickNewChequeLine(object sender, RoutedEventArgs e)
@@ -394,6 +397,7 @@ namespace kukiluli
             newChequeLine.Children.Add(dateTextBox);
 
             TextBox chequeAmountTextBox = new TextBox { Name = "ChequeAmount", Margin = new Thickness(5, 0, 10, 0), Style = (Style)FindResource("TextBoxFilterBar") };
+            chequeAmountTextBox.TextChanged += PaymentSumUpdated;
             Grid.SetColumn(chequeAmountTextBox, 6);
             newChequeLine.Children.Add(chequeAmountTextBox);
 
@@ -425,6 +429,112 @@ namespace kukiluli
 
             // Remove the corresponding RowDefinition
             lines.RowDefinitions.RemoveAt(rowIndex);
+            UpdateInvoiceBalance();
+        }
+
+
+        private void InvoiceLine_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox == null) return;
+
+            Grid parentGrid = textBox.Parent as Grid;
+
+            if (parentGrid == null) return;
+
+            TextBox? priceTextBox = parentGrid.Children
+                .OfType<TextBox>()
+                .FirstOrDefault(tb => tb.Name.Contains("prodPrice"));
+
+            TextBox? quantityTextBox = parentGrid.Children
+                .OfType<TextBox>()
+                .FirstOrDefault(tb => tb.Name.Contains("prodQuantity"));
+
+            TextBox? totalPriceTextBox = parentGrid.Children
+                .OfType<TextBox>()
+                .FirstOrDefault(tb => tb.Name.Contains("prodTotalPrice"));
+
+            if (priceTextBox == null || quantityTextBox == null || totalPriceTextBox == null) return;
+
+            decimal price = 0;
+            int quantity = 1;
+
+            if (decimal.TryParse(priceTextBox.Text, out decimal parsedPrice))
+            {
+                price = parsedPrice;
+            }
+            if (int.TryParse(quantityTextBox.Text, out int parsedQuantity))
+            {
+                quantity = parsedQuantity;
+            }
+
+            decimal totalPrice = price * quantity;
+            totalPriceTextBox.Text = totalPrice.ToString();
+            UpdateInvoiceTotalPrice();
+        }
+
+        private void UpdateInvoiceTotalPrice()
+        {
+            Grid lines = chargeBUT.IsChecked == true ? InvoiceItemLines : OrderItemLines;
+            decimal totalPrice = 0;
+
+            foreach (Grid g in lines.Children)
+            {
+                if (g.Children[5] is TextBox totalPriceTextBox)
+                {
+                    if (decimal.TryParse(totalPriceTextBox.Text, out decimal lineTotal))
+                    {
+                        totalPrice += lineTotal;
+                    }
+                }
+            }
+            if (lines == InvoiceItemLines)
+            {
+                InvoiceTotalSum.Text = totalPrice.ToString();
+                DealTotalSum.Text = $"Total Price: {totalPrice.ToString()}";
+                UpdateInvoiceBalance();
+            }
+            else
+            {
+                OrderTotalSum.Text = totalPrice.ToString();
+            }
+        }
+
+        private void UpdateInvoiceBalance()
+        {
+            decimal totalPriceToPay = decimal.Parse(InvoiceTotalSum.Text);
+            decimal totalPayed = 0;
+
+            decimal.TryParse(TotalCash?.Text ?? "0", out decimal cashValue);
+            decimal.TryParse(CardSumToBill?.Text ?? "0", out decimal cardValue);
+            decimal.TryParse(TotalBankSum?.Text ?? "0", out decimal bankValue);
+            decimal.TryParse(TotalBitSum?.Text ?? "0", out decimal bitValue);
+
+            totalPayed = cashValue + cardValue + bankValue + bitValue;
+
+            if (ChequeLines != null)
+            {
+                foreach (Grid g in ChequeLines.Children)
+                {
+                    if (g.Children[6] is TextBox ChequeAmount)
+                    {
+                        if (decimal.TryParse(ChequeAmount.Text, out decimal lineTotal))
+                        {
+                            totalPayed += lineTotal;
+                        }
+                    }
+                }
+            }
+            if (BalanceDueSum != null)
+            {
+                BalanceDueSum.Text = $"Balance Due: {totalPayed - totalPriceToPay}";
+            }
+        }
+
+        private void PaymentSumUpdated(object sender, TextChangedEventArgs e)
+        {
+            UpdateInvoiceBalance();
         }
     }
 }
