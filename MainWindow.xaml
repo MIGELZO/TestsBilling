@@ -131,7 +131,7 @@
 
                     <!--Charging / Orders Screen-->
 
-                    <Grid x:Name="ChargingScreen" Grid.Row="5" Style="{StaticResource VisibleStyle}">
+                    <Grid x:Name="ChargingScreen" Grid.Row="5" Style="{StaticResource HiddenStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -337,9 +337,29 @@
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
                                     <ComboBox x:Name="ExtDateYear" Width="100" Margin="5" Style="{StaticResource ComboBoxStyle}">
                                         <ComboBoxItem Content="2024"/>
+                                        <ComboBoxItem Content="2025"/>
+                                        <ComboBoxItem Content="2026"/>
+                                        <ComboBoxItem Content="2027"/>
+                                        <ComboBoxItem Content="2028"/>
+                                        <ComboBoxItem Content="2029"/>
+                                        <ComboBoxItem Content="2030"/>
+                                        <ComboBoxItem Content="2031"/>
+                                        <ComboBoxItem Content="2032"/>
+                                        <ComboBoxItem Content="2033"/>
+                                        <ComboBoxItem Content="2034"/>
                                     </ComboBox>
                                     <ComboBox x:Name="ExtDateMonth" Width="60" Margin="5" Style="{StaticResource ComboBoxStyle}">
                                         <ComboBoxItem Content="1"/>
+                                        <ComboBoxItem Content="2"/>
+                                        <ComboBoxItem Content="3"/>
+                                        <ComboBoxItem Content="4"/>
+                                        <ComboBoxItem Content="5"/>
+                                        <ComboBoxItem Content="6"/>
+                                        <ComboBoxItem Content="7"/>
+                                        <ComboBoxItem Content="8"/>
+                                        <ComboBoxItem Content="9"/>
+                                        <ComboBoxItem Content="10"/>
+                                        <ComboBoxItem Content="12"/>
                                     </ComboBox>
                                 </StackPanel>
                                 <TextBox x:Name="Cvv" Grid.Column="2" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
@@ -347,6 +367,17 @@
                                 <TextBox x:Name="CardOwnerName" Grid.Column="4" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
                                 <ComboBox x:Name="Payments" Grid.Column="5" Width="60" Margin="10" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyle}">
                                     <ComboBoxItem Content="1"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                    <ComboBoxItem Content="5"/>
+                                    <ComboBoxItem Content="6"/>
+                                    <ComboBoxItem Content="7"/>
+                                    <ComboBoxItem Content="8"/>
+                                    <ComboBoxItem Content="9"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
                                 </ComboBox>
                                 <TextBox x:Name="CardSumToBill" Grid.Column="6" Margin="10" Style="{StaticResource TextBoxFilterBar}" TextChanged="PaymentSumUpdated"/>
                             </Grid>
@@ -490,7 +521,7 @@
                         </Grid>
 
                         <Grid Grid.Row="5">
-                            <Button Content="Create Invoice" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
+                            <Button x:Name="CreateInvoiceButton" Content="Create Invoice" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
                         </Grid>
                     </Grid>
 
@@ -623,13 +654,13 @@
                             <Separator Grid.Row="5" Height="10" Background="#784ff2" Margin="0 5 0 10"/>
                         </Grid>
                         <Grid Grid.Row="3">
-                            <Button Content="Create Order" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
+                            <Button x:Name="CreateOrderButton" Content="Create Order" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
                         </Grid>
                     </Grid>
 
                     <!--Reports Structure-->
 
-                    <Grid x:Name="ReportsTable" Grid.Row="5" Style="{StaticResource HiddenStyle}">
+                    <Grid x:Name="ReportsTable" Grid.Row="5" Style="{StaticResource VisibleStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -637,57 +668,38 @@
 
                         <Grid x:Name="FilterBar" Grid.Row="0">
                             <TextBlock Text="PlaceHolder" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
-               Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                       Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                             <TextBlock Text="Filter By" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin=" 0 0 215 0"
-               Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                       Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
 
                             <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
                                 <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                   Panel.ZIndex="1" Text="Searce Here..."
-                   Visibility="{Binding ElementName=txtFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                                           Panel.ZIndex="1" Text="Searce Here..."
+                                           Visibility="{Binding ElementName=txtFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
 
                                 <TextBox x:Name="txtFilter" Style="{StaticResource TextBoxFilterBar}"/>
 
                                 <Image Source="\Accets\Info_icon.svg.png" Width="15" Height="15" VerticalAlignment="Center"
-               Margin="0 0 15 0" HorizontalAlignment="Right"/>
+                                       Margin="0 0 15 0" HorizontalAlignment="Right"/>
                             </Grid>
                         </Grid>
 
 
                         <Grid x:Name="DataTable" Grid.Row="1">
-                            <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
+                            <DataGrid x:Name="Test1" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
                                 <DataGrid.Columns>
-                                    <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
-                                        <DataGridCheckBoxColumn.HeaderTemplate>
-                                            <DataTemplate>
-                                                <CheckBox/>
-                                            </DataTemplate>
-                                        </DataGridCheckBoxColumn.HeaderTemplate>
-                                    </DataGridCheckBoxColumn>
 
-                                    <DataGridTextColumn Header="#" IsReadOnly="True"  CanUserResize="False" Width="auto"/>
+                                    <DataGridTextColumn Header="Invoice Number" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding InvoiceID}"/>
+                                    <DataGridTextColumn Header="Date" IsReadOnly="True"  CanUserResize="False" Width="auto" Binding="{Binding Date}"/>
+                                    <DataGridTextColumn Header="Invoice Type" IsReadOnly="True" Width="*" Binding="{Binding InvoiceType}"/>
+                                    <DataGridTextColumn Header="Customer Number" IsReadOnly="True" Width="*" Binding="{Binding CustomerID}"/>
+                                    <DataGridTextColumn Header="Total Amount" IsReadOnly="True" Width="*" Binding="{Binding TotalPrice}"/>
+                                    <DataGridTextColumn Header="Is Deal Refunded?" IsReadOnly="True" Width="*" Binding="{Binding IsRefunded}"/>
+                                    <DataGridTextColumn Header="Deal Number" IsReadOnly="True" Width="*" Binding="{Binding DealNumber}"/>
 
-                                    <DataGridTemplateColumn Header="PlaceHolder" IsReadOnly="False" Width="*">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
-                                                        <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
-                                                    </Border>
-
-                                                    <TextBlock Text="..." VerticalAlignment="Center"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
-                                    <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
-                                    <DataGridTextColumn Header="PlaceHolder" IsReadOnly="True" Width="*"/>
-
-                                    <DataGridTemplateColumn Header="PlaceHolder" IsReadOnly="False" Width="auto">
+                                    <DataGridTemplateColumn Header="Actions" IsReadOnly="False" Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">

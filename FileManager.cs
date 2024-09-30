@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Text.Json;
 
 namespace kukiluli
@@ -14,31 +15,30 @@ namespace kukiluli
             InitializeFromDataFile();
         }
         // modify
-        public Customer CreateCustomer(int customerID, string customerName, string customerEmail, string phone, Invoice invoice)
-        {
-            List<Customer> customers = GetAllCustomers();
-            Customer customer = new Customer(customerID, customerName, customerEmail, phone, invoice);
-            customers.Add(customer);
+        //public Customer CreateCustomer(Customer newCustomer, Invoice invoice)
+        //{
+        //    List<Customer> customers = GetAllCustomers();
+        //    customers.Add(newCustomer);
 
-            File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
-            CreateNewInvoice(invoice);
-            return customer;
-        }
+        //    File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
+        //    CreateNewInvoice(invoice);
+        //    return newCustomer;
+        //}
 
 
-        public Customer UpdateCustomer(int customerId, Invoice invoice)
-        {
-            List<Customer> customers = GetAllCustomers();
-            Customer customer = customers.FirstOrDefault(c => c.CustomerID == customerId);
-            customer.AddInvoice(invoice);
-            File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
-            CreateNewInvoice(invoice);
-            return customer;
+        //public Customer UpdateCustomer(int customerId, Invoice invoice)
+        //{
+        //    List<Customer> customers = GetAllCustomers();
+        //    Customer customer = customers.FirstOrDefault(c => c.CustomerID == customerId);
+        //    customer.AddInvoice(invoice);
+        //    File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
+        //    CreateNewInvoice(invoice);
+        //    return customer;
 
-        }
+        //}
 
         // modify
-        public List<Customer> GetAllCustomers()
+        public ObservableCollection<Customer> GetAllCustomers()
         {
             try
             {
@@ -47,37 +47,37 @@ namespace kukiluli
                 {
                     PropertyNameCaseInsensitive = true
                 };
-                return JsonSerializer.Deserialize<List<Customer>>(jsonContent, options) ?? new List<Customer>();
+                return JsonSerializer.Deserialize<ObservableCollection<Customer>>(jsonContent, options) ?? new ObservableCollection<Customer>();
             }
             catch (Exception ex)
             {
-                return new List<Customer>();
+                return new ObservableCollection<Customer>();
             }
         }
 
-        public List<Invoice>? GetAllInvoices()
+        public ObservableCollection<Invoice>? GetAllInvoices()
         {
             try
             {
                 string jsonContent = File.ReadAllText(InvoicesFilePath);
-                return JsonSerializer.Deserialize<List<Invoice>>(jsonContent);
+                return JsonSerializer.Deserialize<ObservableCollection<Invoice>>(jsonContent);
             }
             catch (Exception)
             {
-                return new List<Invoice>();
+                return new ObservableCollection<Invoice>();
             }
         }
 
         public void CreateNewInvoice(Invoice newInvoice)
         {
-            List<Invoice>? invoices = GetAllInvoices() ?? new List<Invoice>();
+            ObservableCollection<Invoice>? invoices = GetAllInvoices() ?? new ObservableCollection<Invoice>();
             invoices.Add(newInvoice);
             File.WriteAllText(InvoicesFilePath, JsonSerializer.Serialize(invoices));
         }
 
         public void UpdateExistingInvoice(Invoice updatedInvoice)
         {
-            List<Invoice>? invoices = GetAllInvoices() ?? new List<Invoice>();
+            ObservableCollection<Invoice>? invoices = GetAllInvoices() ?? new ObservableCollection<Invoice>();
             Invoice? existingInvoice = invoices.FirstOrDefault(inv => inv.InvoiceID == updatedInvoice.InvoiceID);
 
             if (existingInvoice != null)
@@ -92,38 +92,53 @@ namespace kukiluli
             }
         }
 
-        public List<Invoice> GetAllInvoices(int type)
+        public ObservableCollection<Invoice> GetAllInvoices(int type)
         {
-            List<Invoice> invoices = GetAllInvoices() ?? new List<Invoice>();
-            return invoices.Where(i => i.InvoiceType == type).ToList();
+            ObservableCollection<Invoice> invoices = GetAllInvoices() ?? new ObservableCollection<Invoice>();
+
+            ObservableCollection<Invoice> filteredInvoices = new ObservableCollection<Invoice>(
+                invoices.Where(i => i.InvoiceType == type).ToList()
+            );
+
+            return filteredInvoices;
         }
-        public List<Invoice> GetAllInvoicesPerCustomer(int customerID)
+        public ObservableCollection<Invoice> GetAllInvoicesPerCustomer(int customerID)
         {
-            List<Invoice> invoices = GetAllInvoices() ?? new List<Invoice>();
-            return invoices.Where(i => i.CustomerID == customerID).ToList();
+            ObservableCollection<Invoice> invoices = GetAllInvoices() ?? new ObservableCollection<Invoice>();
+
+            ObservableCollection<Invoice> filteredInvoices = new ObservableCollection<Invoice>(
+                invoices.Where(i => i.CustomerID == customerID).ToList()
+                );
+
+            return filteredInvoices;
         }
-        public List<Invoice> GetAllInvoicesPerCustomer(int customerID, int type)
+        public ObservableCollection<Invoice> GetAllInvoicesPerCustomer(int customerID, int type)
         {
-            List<Invoice> invoices = GetAllInvoices() ?? new List<Invoice>();
-            return invoices.Where(i => i.CustomerID == customerID && i.InvoiceType == type).ToList();
+            ObservableCollection<Invoice> invoices = GetAllInvoices() ?? new ObservableCollection<Invoice>();
+
+            ObservableCollection<Invoice> filteredInvoices = new ObservableCollection<Invoice>(
+                invoices.Where(i => i.CustomerID == customerID && i.InvoiceType == type).ToList()
+                );
+
+            return filteredInvoices;
         }
 
-        public List<Item>? GetAllItems()
+        public ObservableCollection<Item>? GetAllItems()
         {
             try
             {
                 string jsonContent = File.ReadAllText(ItemsFilePath);
-                return JsonSerializer.Deserialize<List<Item>>(jsonContent);
+                return JsonSerializer.Deserialize<ObservableCollection<Item>>(jsonContent);
             }
             catch (Exception)
             {
-                return new List<Item>();
+                return new ObservableCollection<Item>();
             }
         }
 
         public Item CreateItem(string name, decimal price)
         {
-            List<Item> items = GetAllItems() ?? new List<Item>();
+            ObservableCollection<Item> items = GetAllItems() ?? new ObservableCollection<Item>();
             int id = items.Count > 1 ? items.Max(i => i.ItemId) + 1 : 1;
             Item item = new Item(id, name, price);
             items.Add(item);
@@ -133,7 +148,7 @@ namespace kukiluli
 
         public Item UpdateItem(int id, string newName, decimal newPrice)
         {
-            List<Item> items = GetAllItems() ?? new List<Item>();
+            ObservableCollection<Item> items = GetAllItems() ?? new ObservableCollection<Item>();
             Item? item = items.FirstOrDefault(i => i.ItemId == id);
             item.Name = newName;
             item.Price = newPrice;
@@ -142,22 +157,32 @@ namespace kukiluli
         }
         public void DeleteItem(int id)
         {
-            List<Item> items = GetAllItems() ?? new List<Item>();
+            ObservableCollection<Item> items = GetAllItems() ?? new ObservableCollection<Item>();
             Item? item = items.FirstOrDefault(i => i.ItemId == id);
             items.Remove(item);
             File.WriteAllText(ItemsFilePath, JsonSerializer.Serialize(items));
         }
 
-        public List<Invoice> GetAllInvoicesByItem(int itemId)
+        public ObservableCollection<Invoice> GetAllInvoicesByItem(int itemId)
         {
-            List<Invoice> Allinvoices = GetAllInvoices() ?? new List<Invoice>();
-            return Allinvoices.Where(i => i.Items.Keys.Contains(itemId)).ToList();
+            ObservableCollection<Invoice> Allinvoices = GetAllInvoices() ?? new ObservableCollection<Invoice>();
+
+            ObservableCollection<Invoice> filteredInvoices = new ObservableCollection<Invoice>(
+                Allinvoices.Where(i => i.Items.Keys.Contains(itemId)).ToList()
+                );
+
+            return filteredInvoices;
         }
 
-        public List<Invoice> GetAllInvoicesByItem(int itemId, int customerId)
+        public ObservableCollection<Invoice> GetAllInvoicesByItem(int itemId, int customerId)
         {
-            List<Invoice> Allinvoices = GetAllInvoices() ?? new List<Invoice>();
-            return Allinvoices.Where(i => i.CustomerID == customerId && i.Items.Keys.Contains(itemId)).ToList();
+            ObservableCollection<Invoice> Allinvoices = GetAllInvoices() ?? new ObservableCollection<Invoice>();
+
+            ObservableCollection<Invoice> filteredInvoices = new ObservableCollection<Invoice>(
+                Allinvoices.Where(i => i.CustomerID == customerId && i.Items.Keys.Contains(itemId)).ToList()
+                );
+
+            return filteredInvoices;
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -11,94 +12,15 @@ namespace kukiluli
         public MainWindow()
         {
             InitializeComponent();
+
+            ObservableCollection<Invoice> invoices = FM.GetAllInvoices();
+
+            Test1.ItemsSource = invoices;
+
+
         }
 
-        //private void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //Validate Invoice 
 
-
-        //    // get invoice type 
-        //    int invoiceType = IsCharge.IsChecked == true ? 1 : 2;
-
-
-        //    int sum = 0;
-        //    List<Item> thisItems = new List<Item>();
-        //    List<Cheque> thisCheques = new List<Cheque>();
-        //    List<CustomPay> thisCustomPays = new List<CustomPay>();
-
-        //    foreach (childInList in TableItemList)
-        //    {
-        //        thisItems.Add(new Item(childInList.ID.Text, childInList.Name.Text, childInList.Price.Text, childInList.Quan.Text));
-        //        sum += int.Parse(childInList.TotalPrice.Text);
-        //    };
-        //    foreach (childInList in TableChequesList)
-        //    {
-        //        thisCheques.Add(new Item(childInList.cNumber.Text, childInList.bNumber.Text, childInList.sNumber.Text, childInList.cDate.Text, childInList.cSum.Text));
-        //    };
-        //    if (BitPay != 0)
-        //    {
-        //        thisCustomPays.Add(new CustomPay(int.Parse(BitPay.TID.text), decimal.Parse(BitPay.TSUM.Text)));
-        //    };
-        //    if (BankPay != 0)
-        //    {
-        //        thisCustomPays.Add(new CustomPay(int.Parse(BankPay.TID.text), decimal.Parse(BankPay.TSUM.Text)));
-        //    };
-
-        //    string response = AM.CreateNewInvoice(
-        //        invoiceType: invoiceType,
-        //        customerName: CustomerName.Text,
-        //        email: CustomerEmail.Text,
-        //        userMobile: CustomerPhone.Text,
-        //        sendByEmail: true,
-        //        language: "EN",
-        //        items: thisItems,
-        //        cardValidityMonth: int.Parse(CreditCardExpirationDateMonth.Text),
-        //        cardValidityYear: int.Parse(CreditCardExpirationDateYear.Text),
-        //        identityNum: long.Parse(CreditCardOwnerID.Text),
-        //        cardNumber: long.Parse(CreditCardNumber.Text),
-        //        paymentsAmount: int.Parse(Payments.Text),
-        //        cardSum: sum,
-        //        securityCVV: int.Parse(CreditCardSecurityDigits.Text),
-        //        cheques: thisCheques,
-        //        customPays: thisCustomPays
-        //    );
-        //    Dictionary<string, string> responseValues = AM.ParseResponseOfChargeInvoice(response);
-        //    Dictionary<int, int> ItemsToSend = new Dictionary<int, int>()
-        // {
-        //     { int.Parse(ItemID.Text), int.Parse(ItemQuantity.Text) }
-        // };
-        //    Invoice thisInvoice = new Invoice(int.Parse(responseValues["InvoiceID"]), 1, int.Parse(responseValues["CustomerID"]), ItemsToSend, sum, responseValues["DealNumber"]);
-        //    List<Customer> customers = FM.GetAllCustomers();
-        //    Customer thisCustomer = customers.Where(c => c.CustomerID == int.Parse(responseValues["CustomerID"])).FirstOrDefault();
-        //    if (thisCustomer != null)
-        //    {
-        //        FM.UpdateCustomer(int.Parse(responseValues["CustomerID"]), thisInvoice);
-        //    }
-        //    else
-        //    {
-        //        FM.CreateCustomer(int.Parse(responseValues["CustomerID"]), CustomerName.Text, CustomerEmail.Text, CustomerPhone.Text, thisInvoice);
-        //    }
-
-        //    List<Item> AllItems = FM.GetAllItems();
-        //    foreach (Item I in thisItems)
-        //    {
-        //        bool itemExists = AllItems.Any(a => a.ItemId == I.ItemId);
-
-        //        if (itemExists)
-        //        {
-        //            FM.UpdateItem(I.ItemId, I.Name, I.Price);
-        //        }
-        //        else
-        //        {
-        //            FM.CreateItem(I.Name, I.Price);
-        //        }
-        //    }
-
-        //    // update message for user 
-
-        //    // reset form 
-        //}
 
         private void Button_Click_ManuNav(object sender, RoutedEventArgs e)
         {
@@ -498,6 +420,15 @@ namespace kukiluli
             else
             {
                 OrderTotalSum.Text = totalPrice.ToString();
+                if (totalPrice > 0)
+                {
+                    CreateOrderButton.IsEnabled = true;
+                }
+                if (totalPrice == 0)
+                {
+                    CreateOrderButton.IsEnabled = false;
+                }
+
             }
         }
 
@@ -529,6 +460,15 @@ namespace kukiluli
             if (BalanceDueSum != null)
             {
                 BalanceDueSum.Text = $"Balance Due: {totalPayed - totalPriceToPay}";
+
+            }
+            if ((totalPayed - totalPriceToPay) == 0 && totalPriceToPay > 0)
+            {
+                CreateInvoiceButton.IsEnabled = true;
+            }
+            else
+            {
+                CreateInvoiceButton.IsEnabled = false;
             }
         }
 
