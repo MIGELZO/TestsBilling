@@ -8,12 +8,12 @@
         public string Asmacta { get; set; }
         public decimal Sum { get; set; }
 
-        public CustomPay(int transactionID, decimal sum)
+        public CustomPay(int transactionID, string asmachta, decimal sum)
         {
             TransactionID = transactionID;
             TranDate = DateTime.Now;
             Description = transactionID == 28 ? "Payment from Bit" : "Bank transfer";
-            Asmacta = DateTime.Now.ToString();
+            Asmacta = asmachta;
             Sum = sum;
         }
     }

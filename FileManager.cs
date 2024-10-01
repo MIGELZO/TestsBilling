@@ -14,30 +14,27 @@ namespace kukiluli
         {
             InitializeFromDataFile();
         }
-        // modify
-        //public Customer CreateCustomer(Customer newCustomer, Invoice invoice)
-        //{
-        //    List<Customer> customers = GetAllCustomers();
-        //    customers.Add(newCustomer);
 
-        //    File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
-        //    CreateNewInvoice(invoice);
-        //    return newCustomer;
-        //}
+        public Customer CreateCustomer(Customer customer, Invoice invoice)
+        {
+            ObservableCollection<Customer> customers = GetAllCustomers();
+            customers.Add(customer);
 
+            File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
+            CreateNewInvoice(invoice);
+            return customer;
+        }
 
-        //public Customer UpdateCustomer(int customerId, Invoice invoice)
-        //{
-        //    List<Customer> customers = GetAllCustomers();
-        //    Customer customer = customers.FirstOrDefault(c => c.CustomerID == customerId);
-        //    customer.AddInvoice(invoice);
-        //    File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
-        //    CreateNewInvoice(invoice);
-        //    return customer;
+        public Customer UpdateCustomer(int customerId, Invoice invoice)
+        {
+            ObservableCollection<Customer> customers = GetAllCustomers();
+            Customer customer = customers.FirstOrDefault(c => c.CustomerID == customerId);
+            customer.AddInvoice(invoice);
+            File.WriteAllText(CustomersFilePath, JsonSerializer.Serialize(customers));
+            CreateNewInvoice(invoice);
+            return customer;
+        }
 
-        //}
-
-        // modify
         public ObservableCollection<Customer> GetAllCustomers()
         {
             try
@@ -136,10 +133,16 @@ namespace kukiluli
             }
         }
 
-        public Item CreateItem(string name, decimal price)
+        public int GetNextItemID()
+        {
+            ObservableCollection<Item>? items = GetAllItems() ?? new ObservableCollection<Item>();
+            int id = items.Count > 1 ? items.Max(i => i.ItemId) + 1 : 1;
+            return id;
+        }
+
+        public Item CreateItem(int id, string name, decimal price)
         {
             ObservableCollection<Item> items = GetAllItems() ?? new ObservableCollection<Item>();
-            int id = items.Count > 1 ? items.Max(i => i.ItemId) + 1 : 1;
             Item item = new Item(id, name, price);
             items.Add(item);
             File.WriteAllText(ItemsFilePath, JsonSerializer.Serialize(items));
@@ -185,8 +188,6 @@ namespace kukiluli
             return filteredInvoices;
         }
 
-
-        // modify
         public void InitializeFromDataFile()
         {
             if (!File.Exists(CustomersFilePath))

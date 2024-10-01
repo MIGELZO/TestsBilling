@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Web;
+using System.Windows;
 
 namespace kukiluli
 {
@@ -14,6 +15,13 @@ namespace kukiluli
         private readonly string? username = Environment.GetEnvironmentVariable("UserName", EnvironmentVariableTarget.User);
         private readonly string? password = Environment.GetEnvironmentVariable("UserPassword", EnvironmentVariableTarget.User);
 
+        public ApiManager()
+        {
+            if (!CheckUserInformationExist())
+            {
+                MessageBox.Show("Please enter API secrets in Enviorment variables");
+            };
+        }
         // Method to cancel a deal
         public string CancelDeal(int internalDealNumber, decimal? partialSum = null)
         {
@@ -77,8 +85,7 @@ namespace kukiluli
         }
 
 
-        // modify 26/09
-        public async Task<String> CreateNewInvoice(int invoiceType, string customerName, string email, string userMobile, bool sendByEmail, string language, List<Item> items, int? cashPay = null, int? cardValidityMonth = null, int? cardValidityYear = null, long? identityNum = null, long? cardNumber = null, int? securityCVV = null, int? paymentsAmount = null, decimal? cardSum = null, List<CustomPay>? customPays = null, List<Cheque>? cheques = null)
+        public async Task<String> CreateNewInvoice(int invoiceType, string customerName, string email, string userMobile, bool sendByEmail, string language, List<Item> items, decimal? cashPay = null, int? cardValidityMonth = null, int? cardValidityYear = null, long? identityNum = null, long? cardNumber = null, int? securityCVV = null, int? paymentsAmount = null, decimal? cardSum = null, List<CustomPay>? customPays = null, List<Cheque>? cheques = null)
         {
             string urlTemp = "";
             string? cancelDealNumber = "";
@@ -97,6 +104,7 @@ namespace kukiluli
             else if (invoiceType == 2 && cardNumber != null)
             {
                 string cardExipration = cardValidityMonth + "" + cardValidityYear;
+
                 cancelDealNumber = await RefundCreditCard(cardNumber, cardExipration, securityCVV, paymentsAmount, cardSum, customerName);
                 urlTemp = $"{baseUrl}/CreateInvoice.aspx?";
             }
@@ -105,10 +113,11 @@ namespace kukiluli
                 urlTemp = $"{baseUrl}/CreateInvoice.aspx?";
             }
 
+            // user password 
             string url = $"{urlTemp}TerminalNumber={terminalNumber}&UserName={username}&InvoiceHead.CustMobilePH={userMobile}&InvoiceHead.Email={email}&InvoiceHead.IsAutoCreateUpdateAccount=true&InvoiceType={invoiceType}&InvoiceHead.CustName={customerName}&InvoiceHead.SendByEmail={sendByEmail}&InvoiceHead.Language={language}";
             for (int i = 0; i < items.Count; i++)
             {
-                var item = items[i];
+                Item item = items[i];
                 string prefix = i == 0 ? "InvoiceLines" : $"InvoiceLines{i}";
                 url += $"&{prefix}.Description={item.Name}&{prefix}.Price={item.Price}&{prefix}.Quantity={item.Quantity}";
             }
@@ -205,16 +214,50 @@ namespace kukiluli
 
         // modify - need to move to mainwindow.cs 26/09
         // need to check if there is a deal number or not 
-        public Dictionary<string, string?> ParseResponseOfChargeInvoice(string response)
+        public async Task<Dictionary<string, string?>> ParseResponseOfChargeInvoice(string response)
         {
             var parsedResponse = HttpUtility.ParseQueryString(response);
+
+            // Initialize the dictionary to store extracted values
             Dictionary<string, string?> extractedValues = new Dictionary<string, string?>
      {
-         { "InvoiceID", parsedResponse["InvoiceResponse.InvoiceNumber"] },
-         { "DealNumber", parsedResponse["InternalDealNumber"] },
-         { "ResponseCode", parsedResponse["InvoiceResponse.ResponseCode"] },
-         { "CustomerID", parsedResponse["InvoiceResponse.AccountID"] }
+         { "InvoiceID", null },
+         { "DealNumber", null },
+         { "ResponseCode", null },
+         { "CustomerID", null }
      };
+
+            // Extract InvoiceID
+            string? invoiceId = parsedResponse["InvoiceNumber"];
+            if (string.IsNullOrEmpty(invoiceId))
+            {
+                invoiceId = parsedResponse["InvoiceResponse.InvoiceNumber"];
+            }
+            extractedValues["InvoiceID"] = invoiceId;
+
+            // Extract DealNumber
+            string? dealNumber = parsedResponse["InternalDealNumber"];
+            if (string.IsNullOrEmpty(dealNumber))
+            {
+                dealNumber = parsedResponse["InvoiceResponse.InternalDealNumber"];
+            }
+            extractedValues["DealNumber"] = dealNumber;
+
+            // Extract ResponseCode
+            string? responseCode = parsedResponse["ResponseCode"];
+            if (string.IsNullOrEmpty(responseCode))
+            {
+                responseCode = parsedResponse["InvoiceResponse.ResponseCode"];
+            }
+            extractedValues["ResponseCode"] = responseCode;
+
+            // Extract CustomerID
+            string? customerId = parsedResponse["AccountID"];
+            if (string.IsNullOrEmpty(customerId))
+            {
+                customerId = parsedResponse["InvoiceResponse.AccountID"];
+            }
+            extractedValues["CustomerID"] = customerId;
 
             return extractedValues;
         }

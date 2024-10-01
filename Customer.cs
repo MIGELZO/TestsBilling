@@ -11,6 +11,15 @@
 
         public Customer() { }
 
+        public Customer(string fullName, string email, string phone)
+        {
+            FullName = fullName;
+            Email = email;
+            Phone = phone;
+            Invoices = new List<int>();
+            Orders = new Dictionary<int, bool>();
+        }
+
         public Customer(int customerID, string fullName, string email, string phone, Invoice invoice)
         {
             CustomerID = customerID;

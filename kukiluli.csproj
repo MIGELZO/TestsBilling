@@ -17,6 +17,8 @@
     <None Remove="Accets\CreditCardIcon.png" />
     <None Remove="Accets\DeleteIcon.png" />
     <None Remove="Accets\diners.gif" />
+    <None Remove="Accets\DownloadIcon.png" />
+    <None Remove="Accets\EditIcon.png" />
     <None Remove="Accets\ExitIcon.png" />
     <None Remove="Accets\ExitIcon2.png" />
     <None Remove="Accets\Gpay_Logo.png" />
@@ -28,7 +30,10 @@
     <None Remove="Accets\PCI DSS.png" />
     <None Remove="Accets\pciLogo.png" />
     <None Remove="Accets\PurpleLogoSmall.png" />
+    <None Remove="Accets\RefundIcon.png" />
+    <None Remove="Accets\SendIcon.png" />
     <None Remove="Accets\SettingsIcon.png" />
+    <None Remove="Accets\ShowIcon.png" />
     <None Remove="Accets\visa.gif" />
   </ItemGroup>
 
@@ -41,6 +46,8 @@
     <Resource Include="Accets\CreditCardIcon.png" />
     <Resource Include="Accets\DeleteIcon.png" />
     <Resource Include="Accets\diners.gif" />
+    <Resource Include="Accets\DownloadIcon.png" />
+    <Resource Include="Accets\EditIcon.png" />
     <Resource Include="Accets\ExitIcon.png" />
     <Resource Include="Accets\Gpay_Logo.png" />
     <Resource Include="Accets\HomeIcon.png" />
@@ -51,7 +58,10 @@
     <Resource Include="Accets\PCI DSS.png" />
     <Resource Include="Accets\pciLogo.png" />
     <Resource Include="Accets\PurpleLogoSmall.png" />
+    <Resource Include="Accets\RefundIcon.png" />
+    <Resource Include="Accets\SendIcon.png" />
     <Resource Include="Accets\SettingsIcon.png" />
+    <Resource Include="Accets\ShowIcon.png" />
     <Resource Include="Accets\visa.gif" />
   </ItemGroup>
 

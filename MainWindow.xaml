@@ -29,7 +29,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button HorizontalAlignment="Left" Margin="20 28 0 35" Style="{StaticResource TopButton}">
+                    <Button HorizontalAlignment="Left" ToolTip="Home Pase" Margin="20 28 0 35" Style="{StaticResource TopButton}">
                         <Image Source="\Accets\HomeIcon.png" Width="15" Height="15" />
                     </Button>
 
@@ -52,21 +52,21 @@
                             <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
 
                             <StackPanel DockPanel.Dock="Top">
-                                <RadioButton x:Name="chargingBUT" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
+                                <RadioButton x:Name="chargingBUT" ToolTip="Charge And Refund" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="\Accets\CreditCardIcon.png" Style="{StaticResource MenuButtonIcon}"/>
                                         <TextBlock Text="Charge / Order"/>
                                     </StackPanel>
                                 </RadioButton>
 
-                                <RadioButton x:Name="reportsBUT" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
+                                <RadioButton x:Name="reportsBUT" ToolTip="Invoice Reports" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="\Accets\InvoiceIcon.png" Style="{StaticResource MenuButtonIcon}"/>
                                         <TextBlock Text="Reports"/>
                                     </StackPanel>
                                 </RadioButton>
 
-                                <RadioButton x:Name="itemsBUT" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
+                                <RadioButton x:Name="itemsBUT" ToolTip="Items And Customers" Style="{StaticResource ManuButton}" Click="Button_Click_ManuNav">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="\Accets\CartIcon.png" Style="{StaticResource MenuButtonIcon}"/>
                                         <TextBlock Text="Items"/>
@@ -74,7 +74,7 @@
                                 </RadioButton>
                             </StackPanel>
 
-                            <RadioButton Style="{StaticResource ManuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Checked="RadioButton_ExitApp">
+                            <RadioButton Style="{StaticResource ManuButton}" ToolTip="Back To GameCenter" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Checked="RadioButton_ExitApp">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="\Accets\ExitIcon.png" Style="{StaticResource MenuButtonIcon}"/>
                                     <TextBlock Text="Exit App"/>
@@ -102,11 +102,11 @@
                                Panel.ZIndex="1" Text="Test Terminal 1001"/>
                     </Grid>
 
-                    <Button Style="{StaticResource TopButton}" Margin="0 0 20 0" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource TopButton}" ToolTip="Terminal Settings" Margin="0 0 20 0" HorizontalAlignment="Right">
                         <Image Source="\Accets\SettingsIcon.png" Width="15" Height="15" />
                     </Button>
 
-                    <TextBlock Text="Head Title" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                    <TextBlock x:Name="HeadTitle" Text="" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
                            HorizontalAlignment="Left" Foreground="#121518"/>
 
                     <!--Top Center Manu-->
@@ -114,24 +114,22 @@
                     <Separator Height="1" Grid.Row="3" Margin="0 -1 0 10"/>
 
                     <StackPanel x:Name="ChargesNOrdersTabMenu" Visibility="Visible" Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
-                        <RadioButton x:Name="chargeBUT" Content="Charge+Invoice" Style="{StaticResource TabButton}" IsChecked="True" Checked="Button_Click_ChargeTabNav"/>
-                        <RadioButton x:Name="refundBUT" Content="Refund Deal" Style="{StaticResource TabButton}" Checked="Button_Click_ChargeTabNav"/>
-                        <RadioButton x:Name="orderBUT" Content="Create Order" Style="{StaticResource TabButton}" Checked="Button_Click_ChargeTabNav"/>
+                        <RadioButton x:Name="chargeBUT" Content="Charge+Invoice" Style="{StaticResource TabButton}" IsChecked="True" Checked="Button_Click_TabNav"/>
+                        <RadioButton x:Name="refundBUT" Content="Refund Deal" Style="{StaticResource TabButton}" Checked="Button_Click_TabNav"/>
+                        <RadioButton x:Name="orderBUT" Content="Create Order" Style="{StaticResource TabButton}" Checked="Button_Click_TabNav"/>
                     </StackPanel>
                     <StackPanel x:Name="ReportsTabMenu" Visibility="Hidden" Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
-                        <RadioButton Content="all doc" Style="{StaticResource TabButton}" IsChecked="True"/>
-                        <RadioButton Content="by custo" Style="{StaticResource TabButton}"/>
-                        <RadioButton Content="something" Style="{StaticResource TabButton}"/>
+                        <RadioButton x:Name="allDocBUT" Content="All Documents" Style="{StaticResource TabButton}" IsChecked="True" Checked="Button_Click_TabNav"/>
+                        <RadioButton x:Name="byCusBUT" Content="Documents By Customer" Width="170" Style="{StaticResource TabButton}" Checked="Button_Click_TabNav"/>
                     </StackPanel>
                     <StackPanel x:Name="ItemsTabMenu" Visibility="Hidden" Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
-                        <RadioButton Content="all prod" Style="{StaticResource TabButton}" IsChecked="True"/>
-                        <RadioButton Content="all items" Style="{StaticResource TabButton}"/>
-                        <RadioButton Content="something" Style="{StaticResource TabButton}"/>
+                        <RadioButton x:Name="allItemsBUT" Content="All Items" Style="{StaticResource TabButton}" IsChecked="True" Checked="Button_Click_TabNav"/>
+                        <RadioButton x:Name="allCusBUT" Content="All Customers" Style="{StaticResource TabButton}" Checked="Button_Click_TabNav"/>
                     </StackPanel>
 
                     <!--Charging / Orders Screen-->
 
-                    <Grid x:Name="ChargingScreen" Grid.Row="5" Style="{StaticResource HiddenStyle}">
+                    <Grid x:Name="ChargingScreen" Grid.Row="5" Style="{StaticResource VisibleStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -166,7 +164,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Name *" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Name" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                                 <TextBlock Text="Phone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                                 <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             </Grid>
@@ -186,7 +184,7 @@
                             </Grid>
                             <Separator Grid.Row="4" Height="10" Background="#784ff2" Margin="0 5 0 5"/>
                         </Grid>
-                                
+
 
                         <!--Invoice Product Section-->
 
@@ -212,7 +210,7 @@
                                     <ColumnDefinition Width="5*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left" Click="Button_ClickNewProductLine">
+                                <Button Grid.Row="1" Grid.Column="0" ToolTip="New Line" Style="{StaticResource TopButton}" HorizontalAlignment="Left" Click="Button_ClickNewProductLine">
                                     <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
                                 </Button>
                                 <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
@@ -237,7 +235,7 @@
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="5*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
+                                    <Button Grid.Column="0" ToolTip="First Line Cannot Be Deleted!!" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
                                         <Image Source="\Accets\DeleteIcon.png" Width="15" Height="15" />
                                     </Button>
                                     <TextBox x:Name="IprodID" Grid.Column="1" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
@@ -286,7 +284,7 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Cash amount: " Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                            <TextBlock Text="Cash amount" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             <TextBox x:Name="TotalCash" Grid.Column="1" Width="150" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="PaymentSumUpdated"/>
                         </Grid>
 
@@ -311,14 +309,14 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Card Number: *" Grid.Column="0" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Expiration Date:" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Security Digits:" Grid.Column="2" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
-                                <Image Source="/Accets/Info_icon.svg.png" Grid.Column="2" Width="15" Height="15" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="150,0,0,0"/>
-                                <TextBlock Text="Card Owner's ID (IL only):" Grid.Column="3" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Card Owner Name:" Grid.Column="4" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Payments:" Grid.Column="5" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Sum To Bill:" Grid.Column="6" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Card Number" Grid.Column="0" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Expiration Date" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Security Digits" Grid.Column="2" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
+                                <Image Source="/Accets/Info_icon.svg.png" ToolTip="3 Digits Behind The Card" Grid.Column="2" Width="15" Height="15" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="150,0,0,0"/>
+                                <TextBlock Text="Card Owner's ID (IL only)" Grid.Column="3" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Card Owner Name" Grid.Column="4" VerticalAlignment="Center" Margin="10" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Payments" Grid.Column="5" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Sum To Bill" Grid.Column="6" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}"/>
                             </Grid>
                             <Separator Height="1" Grid.Row="1"  Background="#dae2ea" Margin="0 2 0 10"/>
 
@@ -403,7 +401,7 @@
                                     <ColumnDefinition Width="5*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left" Click="Button_ClickNewChequeLine">
+                                <Button Grid.Column="0" Style="{StaticResource TopButton}" ToolTip="New Line" HorizontalAlignment="Left" Click="Button_ClickNewChequeLine">
                                     <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
                                 </Button>
                                 <TextBlock Text="Account number" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
@@ -431,7 +429,7 @@
                                         <ColumnDefinition Width="5*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Button Grid.Column="0" Style="{StaticResource TopButton}"  HorizontalAlignment="Left">
+                                    <Button Grid.Column="0" Style="{StaticResource TopButton}" ToolTip="First Line Cannot Be Deleted!!"  HorizontalAlignment="Left">
                                         <Image Source="\Accets\DeleteIcon.png" Width="15" Height="15" />
                                     </Button>
                                     <TextBox x:Name="AccountNumber" Grid.Column="1" Margin="5 0 10 0" Style="{StaticResource TextBoxFilterBar}"/>
@@ -521,14 +519,8 @@
                         </Grid>
 
                         <Grid Grid.Row="5">
-                            <Button x:Name="CreateInvoiceButton" Content="Create Invoice" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
+                            <Button x:Name="CreateInvoiceButton" Content="Create Invoice" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}" Click="SendInvoiceButton_Click"/>
                         </Grid>
-                    </Grid>
-
-                    <!--Refund Screen-->
-
-                    <Grid x:Name="RefundHeadTitle" Grid.Row="4" Style="{StaticResource HiddenStyle}">
-                        <TextBlock Text="Refund Existing Deal" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
                     </Grid>
 
                     <!--Order Creation Screen-->
@@ -563,7 +555,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Name *" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Name" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                                 <TextBlock Text="Phone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                                 <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             </Grid>
@@ -607,7 +599,7 @@
                                     <ColumnDefinition Width="5*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left" Click="Button_ClickNewProductLine">
+                                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" ToolTip="New Line" HorizontalAlignment="Left" Click="Button_ClickNewProductLine">
                                     <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
                                 </Button>
                                 <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
@@ -632,7 +624,7 @@
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="5*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
+                                    <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" ToolTip="First Line Cannot Be Deleted!!" HorizontalAlignment="Left">
                                         <Image Source="\Accets\DeleteIcon.png" Width="15" Height="15" />
                                     </Button>
                                     <TextBox x:Name="OprodID" Grid.Column="1" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
@@ -654,20 +646,20 @@
                             <Separator Grid.Row="5" Height="10" Background="#784ff2" Margin="0 5 0 10"/>
                         </Grid>
                         <Grid Grid.Row="3">
-                            <Button x:Name="CreateOrderButton" Content="Create Order" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
+                            <Button x:Name="CreateOrderButton" Content="Create Order" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}" Click="SendInvoiceButton_Click"/>
                         </Grid>
                     </Grid>
 
                     <!--Reports Structure-->
 
-                    <Grid x:Name="ReportsTable" Grid.Row="5" Style="{StaticResource VisibleStyle}">
+                    <Grid x:Name="ReportsTable" Grid.Row="5" Style="{StaticResource HiddenStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Grid x:Name="FilterBar" Grid.Row="0">
-                            <TextBlock Text="PlaceHolder" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
+                            <TextBlock x:Name="Subtitle" Text="" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
                                        Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                             <TextBlock Text="Filter By" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin=" 0 0 215 0"
@@ -686,28 +678,107 @@
                             </Grid>
                         </Grid>
 
-
-                        <Grid x:Name="DataTable" Grid.Row="1">
-                            <DataGrid x:Name="Test1" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
+                        <!--Documents Table-->
+                        
+                        <Grid x:Name="DocumentsTable" Grid.Row="1" Style="{StaticResource VisibleStyle}">
+                            <DataGrid x:Name="DocumentsData" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
                                 <DataGrid.Columns>
 
-                                    <DataGridTextColumn Header="Invoice Number" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding InvoiceID}"/>
-                                    <DataGridTextColumn Header="Date" IsReadOnly="True"  CanUserResize="False" Width="auto" Binding="{Binding Date}"/>
+                                    <DataGridTextColumn Header="Invoice Number" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding InvoiceID}"/>
+                                    <DataGridTextColumn Header="Date" IsReadOnly="True"  CanUserResize="False" Width="*" Binding="{Binding Date}"/>
                                     <DataGridTextColumn Header="Invoice Type" IsReadOnly="True" Width="*" Binding="{Binding InvoiceType}"/>
                                     <DataGridTextColumn Header="Customer Number" IsReadOnly="True" Width="*" Binding="{Binding CustomerID}"/>
                                     <DataGridTextColumn Header="Total Amount" IsReadOnly="True" Width="*" Binding="{Binding TotalPrice}"/>
                                     <DataGridTextColumn Header="Is Deal Refunded?" IsReadOnly="True" Width="*" Binding="{Binding IsRefunded}"/>
                                     <DataGridTextColumn Header="Deal Number" IsReadOnly="True" Width="*" Binding="{Binding DealNumber}"/>
 
+                                    <DataGridTemplateColumn x:Name="DocActionRefund" Header="Actions" IsReadOnly="False" Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <!--<Button x:Name="DocShowButton" Visibility="Visible" Style="{StaticResource GridShowButton}" ToolTip="Show Document">
+                                                        <Image Source="\Accets\ShowIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                    </Button>-->
+                                                    <Button x:Name="DocDownButton" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Download Document">
+                                                        <Image Source="\Accets\DownloadIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                    </Button>
+                                                    <Button x:Name="DocRefundButton" Style="{StaticResource GridDownloadButton}" Margin="10 0 0 0" ToolTip="Refund Deal">
+                                                        <Image Source="\Accets\RefundIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn x:Name="DocActionReports" Header="Actions" Visibility="Collapsed" IsReadOnly="False" Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button x:Name="DocShowButton" Visibility="Visible" Style="{StaticResource GridShowButton}" ToolTip="Show Document">
+                                                        <Image Source="\Accets\ShowIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                    </Button>
+                                                    <Button x:Name="DocDownButton" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Download Document">
+                                                        <Image Source="\Accets\DownloadIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                    </Button>
+                                                    <Button x:Name="DocSendButton" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Send To Mail">
+                                                        <Image Source="\Accets\SendIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                        
+                        <!--Items Table-->
+
+                        <Grid x:Name="ItemsTable" Grid.Row="1" Style="{StaticResource HiddenStyle}">
+                            
+                            <!--Add Item-->
+                            
+                            <DataGrid x:Name="ItemsData" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn Header="Item ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding ItemId}"/>
+                                    <DataGridTextColumn Header="Item Name" IsReadOnly="True"  CanUserResize="False" Width="*" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Item Price" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>
+                                    
                                     <DataGridTemplateColumn Header="Actions" IsReadOnly="False" Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Style="{StaticResource GridShowButton}">
-                                                        <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource GridImageIcon}"/>
+                                                    <Button Style="{StaticResource GridShowButton}" ToolTip="Edit Item">
+                                                        <Image Source="\Accets\EditIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
-                                                    <Button Style="{StaticResource GridDownloadButton}" Margin="5 0 0 0">
-                                                        <Image Source="\Accets\Info_icon.svg.png" Style="{StaticResource GridImageIcon}"/>
+                                                    <Button Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Delete Item">
+                                                        <Image Source="\Accets\DeleteIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+
+                        <!--Customers Table-->
+
+                        <Grid x:Name="CustomersTable" Grid.Row="1" Style="{StaticResource HiddenStyle}">
+                            <DataGrid x:Name="CustomersData" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn Header="Customer ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding CustomerID}"/>
+                                    <DataGridTextColumn Header="Customer Name" IsReadOnly="True"  CanUserResize="False" Width="*" Binding="{Binding FullName}"/>
+                                    <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+                                    <DataGridTextColumn Header="Phone Number" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+
+                                    <DataGridTemplateColumn Header="Actions" IsReadOnly="False" Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Style="{StaticResource GridShowButton}" ToolTip="Create Document To Customer">
+                                                        <Image Source="\Accets\InvoiceIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
                                                 </StackPanel>
                                             </DataTemplate>
