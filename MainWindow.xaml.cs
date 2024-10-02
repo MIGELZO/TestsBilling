@@ -21,12 +21,15 @@ namespace kukiluli
 
             items = FM.GetAllItems();
             ItemsData.ItemsSource = items;
+            ItemsPopData.ItemsSource = items;
+
 
             customers = FM.GetAllCustomers();
             CustomersData.ItemsSource = customers;
+            CustomerPopData.ItemsSource = customers;
 
         }
-        private async Task SendInvoiceButton_Click()
+        private async Task SendInvoiceButton()
         {
             int invoiceType;
             char invoiceTypeKind;
@@ -69,8 +72,8 @@ namespace kukiluli
             Customer thisCustomer = new Customer
                 (
                     ((TextBox)this.FindName($"{CustomerType}Name")).Text,
-                    ((TextBox)this.FindName($"{CustomerType}Phone")).Text,
-                    ((TextBox)this.FindName($"{CustomerType}Email")).Text
+                    ((TextBox)this.FindName($"{CustomerType}Email")).Text,
+                    ((TextBox)this.FindName($"{CustomerType}Phone")).Text
                 );
 
             foreach (UIElement element in ItemsGrid.Children)
@@ -223,6 +226,7 @@ namespace kukiluli
                 {
                     case "chargingBUT":
                         {
+                            CleanAllForms();
                             HeadTitle.Text = "Charge Or Refund Manualy";
                             Subtitle.Text = "";
                             ChargesNOrdersTabMenu.Visibility = Visibility.Visible;
@@ -233,10 +237,17 @@ namespace kukiluli
                             ChargingScreen.Style = VisibleStyle;
                             OrderCreationScreen.Style = HiddenStyle;
                             ReportsTable.Style = HiddenStyle;
+
+                            DocumentsTable.Style = VisibleStyle;
+                            DocActionRefund.Visibility = Visibility.Visible;
+                            DocActionReports.Visibility = Visibility.Hidden;
+                            ItemsTable.Style = HiddenStyle;
+                            CustomersTable.Style = HiddenStyle;
                             break;
                         }
                     case "reportsBUT":
                         {
+                            CleanAllForms();
                             invoices = FM.GetAllInvoices();
                             HeadTitle.Text = "All Reports";
                             Subtitle.Text = "All Invoices";
@@ -248,10 +259,17 @@ namespace kukiluli
                             ReportsTable.Style = VisibleStyle;
                             OrderCreationScreen.Style = HiddenStyle;
                             ChargingScreen.Style = HiddenStyle;
+
+                            DocumentsTable.Style = VisibleStyle;
+                            DocActionRefund.Visibility = Visibility.Hidden;
+                            DocActionReports.Visibility = Visibility.Visible;
+                            ItemsTable.Style = HiddenStyle;
+                            CustomersTable.Style = HiddenStyle;
                             break;
                         }
                     case "itemsBUT":
                         {
+                            CleanAllForms();
                             HeadTitle.Text = "Items & Customers";
                             Subtitle.Text = "Items List";
                             ItemsTabMenu.Visibility = Visibility.Visible;
@@ -262,6 +280,12 @@ namespace kukiluli
                             ReportsTable.Style = VisibleStyle;
                             OrderCreationScreen.Style = HiddenStyle;
                             ChargingScreen.Style = HiddenStyle;
+
+                            DocumentsTable.Style = HiddenStyle;
+                            DocActionRefund.Visibility = Visibility.Visible;
+                            DocActionReports.Visibility = Visibility.Hidden;
+                            ItemsTable.Style = VisibleStyle;
+                            CustomersTable.Style = HiddenStyle;
                             break;
                         }
                 }
@@ -288,7 +312,7 @@ namespace kukiluli
                             ReportsTable.Style = HiddenStyle;
                             OrderCreationScreen.Style = HiddenStyle;
 
-                            DocumentsTable.Style = VisibleStyle;
+                            DocumentsTable.Style = HiddenStyle;
                             DocActionRefund.Visibility = Visibility.Visible;
                             DocActionReports.Visibility = Visibility.Hidden;
                             ItemsTable.Style = HiddenStyle;
@@ -303,6 +327,11 @@ namespace kukiluli
                             ChargingScreen.Style = HiddenStyle;
                             OrderCreationScreen.Style = HiddenStyle;
 
+                            DocumentsTable.Style = VisibleStyle;
+                            DocActionRefund.Visibility = Visibility.Visible;
+                            DocActionReports.Visibility = Visibility.Hidden;
+                            ItemsTable.Style = HiddenStyle;
+                            CustomersTable.Style = HiddenStyle;
                             break;
                         }
                     case "orderBUT":
@@ -313,6 +342,11 @@ namespace kukiluli
                             ReportsTable.Style = HiddenStyle;
                             ChargingScreen.Style = HiddenStyle;
 
+                            DocumentsTable.Style = HiddenStyle;
+                            DocActionRefund.Visibility = Visibility.Visible;
+                            DocActionReports.Visibility = Visibility.Hidden;
+                            ItemsTable.Style = HiddenStyle;
+                            CustomersTable.Style = HiddenStyle;
                             break;
                         }
                     case "allDocBUT":
@@ -321,21 +355,31 @@ namespace kukiluli
 
                             HeadTitle.Text = "All Reports";
                             Subtitle.Text = "Browse All Documents";
+                            ReportsTable.Style = VisibleStyle;
+                            ChargingScreen.Style = HiddenStyle;
+                            OrderCreationScreen.Style = HiddenStyle;
 
                             DocumentsTable.Style = VisibleStyle;
-                            DocActionReports.Visibility = Visibility.Visible;
                             DocActionRefund.Visibility = Visibility.Hidden;
+                            DocActionReports.Visibility = Visibility.Visible;
                             ItemsTable.Style = HiddenStyle;
                             CustomersTable.Style = HiddenStyle;
-
                             break;
                         }
                     case "byCusBUT":
                         {
                             HeadTitle.Text = "All Reports";
                             Subtitle.Text = "Documents By Customer";
-                            // מסנן לפי לקוח
+                            ReportsTable.Style = VisibleStyle;
+                            ChargingScreen.Style = HiddenStyle;
+                            OrderCreationScreen.Style = HiddenStyle;
 
+                            // מסנן לפי לקוח
+                            DocumentsTable.Style = VisibleStyle;
+                            DocActionRefund.Visibility = Visibility.Hidden;
+                            DocActionReports.Visibility = Visibility.Visible;
+                            ItemsTable.Style = HiddenStyle;
+                            CustomersTable.Style = HiddenStyle;
                             break;
                         }
                     case "allItemsBUT":
@@ -345,19 +389,30 @@ namespace kukiluli
 
                             HeadTitle.Text = "Items & Customers";
                             Subtitle.Text = "Items List";
-                            ItemsTable.Style = VisibleStyle;
-                            DocumentsTable.Style = HiddenStyle;
-                            CustomersTable.Style = HiddenStyle;
+                            ReportsTable.Style = VisibleStyle;
+                            ChargingScreen.Style = HiddenStyle;
+                            OrderCreationScreen.Style = HiddenStyle;
 
+                            DocumentsTable.Style = HiddenStyle;
+                            DocActionRefund.Visibility = Visibility.Visible;
+                            DocActionReports.Visibility = Visibility.Hidden;
+                            ItemsTable.Style = VisibleStyle;
+                            CustomersTable.Style = HiddenStyle;
                             break;
                         }
                     case "allCusBUT":
                         {
                             HeadTitle.Text = "Items & Customers";
                             Subtitle.Text = "Customers List";
-                            CustomersTable.Style = VisibleStyle;
-                            ItemsTable.Style = HiddenStyle;
+                            ReportsTable.Style = VisibleStyle;
+                            ChargingScreen.Style = HiddenStyle;
+                            OrderCreationScreen.Style = HiddenStyle;
 
+                            DocumentsTable.Style = HiddenStyle;
+                            DocActionRefund.Visibility = Visibility.Visible;
+                            DocActionReports.Visibility = Visibility.Hidden;
+                            ItemsTable.Style = HiddenStyle;
+                            CustomersTable.Style = VisibleStyle;
                             break;
                         }
                 }
@@ -905,7 +960,96 @@ namespace kukiluli
 
         private async void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
-            await SendInvoiceButton_Click();
+            await SendInvoiceButton();
+            CleanAllForms();
+        }
+
+        public void CleanAllForms()
+        {
+            IcustomerName.Text = "";
+            IcustomerPhone.Text = "";
+            IcustomerEmail.Text = "";
+            IprodID.Text = "";
+            IprodDescription.Text = "";
+            IprodPrice.Text = "";
+            IprodQuantity.Text = "1";
+            IprodTotalPrice.Text = "0.00";
+            InvoiceTotalSum.Text = "0.00";
+            TotalCash.Text = "";
+            CardNumber.Text = "";
+            ExtDateYear.SelectedIndex = 0;
+            ExtDateMonth.SelectedIndex = 0;
+            Cvv.Text = "";
+            CardOwnerId.Text = "";
+            CardOwnerName.Text = "";
+            Payments.SelectedIndex = 0;
+            CardSumToBill.Text = "";
+            AccountNumber.Text = "";
+            BranchNumber.Text = "";
+            BankNumber.Text = "";
+            ChequeNumber.Text = "";
+            ChequeDate.Text = "";
+            ChequeAmount.Text = "";
+            AsmachtaBank.Text = "";
+            TotalBankSum.Text = "";
+            AsmachtaBit.Text = "";
+            TotalBitSum.Text = "";
+            OcustomerName.Text = "";
+            OcustomerPhone.Text = "";
+            OcustomerEmail.Text = "";
+            OprodID.Text = "";
+            OprodDescription.Text = "";
+            OprodPrice.Text = "";
+            OprodQuantity.Text = "";
+            OprodTotalPrice.Text = "";
+            OrderTotalSum.Text = "";
+
+            while (InvoiceItemLines.Children.Count > 1)
+            {
+                InvoiceItemLines.Children.RemoveAt(1);
+            }
+            while (OrderItemLines.Children.Count > 1)
+            {
+                OrderItemLines.Children.RemoveAt(1);
+            }
+            while (ChequeLines.Children.Count > 1)
+            {
+                ChequeLines.Children.RemoveAt(1);
+            }
+        }
+
+        private void Button_ClickGetUser(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow.IsOpen = true;
+            AddItemPop.Visibility = Visibility.Hidden;
+            EditItemPop.Visibility = Visibility.Hidden;
+            GetItemPop.Visibility = Visibility.Hidden;
+            GetCustomerPop.Visibility = Visibility.Visible;
+        }
+
+        private void Button_ClickGetItem(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow.IsOpen = true;
+            AddItemPop.Visibility = Visibility.Hidden;
+            EditItemPop.Visibility = Visibility.Hidden;
+            GetItemPop.Visibility = Visibility.Visible;
+            GetCustomerPop.Visibility = Visibility.Hidden;
+        }
+        private void Button_ClickCreateNewItem(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow.IsOpen = true;
+            AddItemPop.Visibility = Visibility.Visible;
+            EditItemPop.Visibility = Visibility.Hidden;
+            GetItemPop.Visibility = Visibility.Hidden;
+            GetCustomerPop.Visibility = Visibility.Hidden;
+        }
+        private void Button_ClickEditItem(object sender, RoutedEventArgs e)
+        {
+            PopUpWindow.IsOpen = true;
+            AddItemPop.Visibility = Visibility.Hidden;
+            EditItemPop.Visibility = Visibility.Visible;
+            GetItemPop.Visibility = Visibility.Hidden;
+            GetCustomerPop.Visibility = Visibility.Hidden;
         }
     }
 }

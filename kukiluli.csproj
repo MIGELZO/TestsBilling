@@ -15,6 +15,7 @@
     <None Remove="Accets\billing1.png" />
     <None Remove="Accets\CartIcon.png" />
     <None Remove="Accets\CreditCardIcon.png" />
+    <None Remove="Accets\CustomerIcon.png" />
     <None Remove="Accets\DeleteIcon.png" />
     <None Remove="Accets\diners.gif" />
     <None Remove="Accets\DownloadIcon.png" />
@@ -44,6 +45,7 @@
     <Resource Include="Accets\billing1.png" />
     <Resource Include="Accets\CartIcon.png" />
     <Resource Include="Accets\CreditCardIcon.png" />
+    <Resource Include="Accets\CustomerIcon.png" />
     <Resource Include="Accets\DeleteIcon.png" />
     <Resource Include="Accets\diners.gif" />
     <Resource Include="Accets\DownloadIcon.png" />

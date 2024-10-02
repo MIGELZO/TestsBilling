@@ -151,22 +151,26 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="Choose Action :" Grid.Row="0" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5 0 0 10" Style="{StaticResource TextBlockStyle}"/>
-                            <StackPanel x:Name="qw" Visibility="Visible" Grid.Row="0" Orientation="Horizontal" Margin="120 0 0 10">
+                            <StackPanel x:Name="ChargeAction" Visibility="Visible" Grid.Row="0" Orientation="Horizontal" Margin="120 0 0 10">
                                 <RadioButton x:Name="IsCharge" Content="Charge ▲" Foreground="Green" Style="{StaticResource TabButton}" IsChecked="True"/>
                                 <RadioButton x:Name="IsRefund" Content="Refund ▼" Foreground="Red" Style="{StaticResource TabButton}"/>
                             </StackPanel>
                             <TextBlock Grid.Row="0" Text="Customer Details" HorizontalAlignment="Center" Margin="0 0 0 10" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
 
-                            <Grid Grid.Row="1" Margin="40 0 40 0">
+                            <Grid Grid.Row="1" Margin="0 0 40 0">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Name" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Phone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <Button Grid.Column="0" ToolTip="Customers List" Style="{StaticResource TopButton}" Height="30" VerticalAlignment="Bottom" Click="Button_ClickGetUser" >
+                                    <Image Source="\Accets\CustomerIcon.png" Width="15" Height="15" />
+                                </Button>
+                                <TextBlock Text="Name" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Phone" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             </Grid>
                             <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
 
@@ -176,7 +180,6 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-
 
                                 <TextBox x:Name="IcustomerName" Grid.Column="0" Margin="5 0 150 0" Style="{StaticResource TextBoxFilterBar}"/>
                                 <TextBox x:Name="IcustomerPhone" Grid.Column="1" Margin="5 0 150 0" Style="{StaticResource TextBoxFilterBar}"/>
@@ -195,14 +198,15 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Text="Items:" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
 
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="5*"/>
                                     <ColumnDefinition Width="15*"/>
                                     <ColumnDefinition Width="6*"/>
@@ -210,14 +214,18 @@
                                     <ColumnDefinition Width="5*"/>
                                 </Grid.ColumnDefinitions>
 
+
                                 <Button Grid.Row="1" Grid.Column="0" ToolTip="New Line" Style="{StaticResource TopButton}" HorizontalAlignment="Left" Click="Button_ClickNewProductLine">
                                     <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
                                 </Button>
-                                <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Description" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Price" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Total Price" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <Button Grid.Row="1" Grid.Column="1" ToolTip="Products List" Style="{StaticResource TopButton}" HorizontalAlignment="Left" Click="Button_ClickGetItem" >
+                                    <Image Source="\Accets\CartIcon.png" Width="15" Height="15" />
+                                </Button>
+                                <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Description" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Price" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Total Price" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             </Grid>
                             <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
 
@@ -228,7 +236,8 @@
 
                                 <Grid Grid.Row="0" Margin="0 0 0 5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="5*"/>
                                         <ColumnDefinition Width="15*"/>
                                         <ColumnDefinition Width="6*"/>
@@ -238,11 +247,11 @@
                                     <Button Grid.Column="0" ToolTip="First Line Cannot Be Deleted!!" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
                                         <Image Source="\Accets\DeleteIcon.png" Width="15" Height="15" />
                                     </Button>
-                                    <TextBox x:Name="IprodID" Grid.Column="1" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                    <TextBox x:Name="IprodDescription" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                    <TextBox x:Name="IprodPrice" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
-                                    <TextBox x:Name="IprodQuantity" Text="1" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
-                                    <TextBox x:Name="IprodTotalPrice" Text="0.00" Grid.Column="5" Margin="5 0 5 0" IsReadOnly="True" Style="{StaticResource TextBoxFilterBar}"/>
+                                    <TextBox x:Name="IprodID" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                                    <TextBox x:Name="IprodDescription" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                                    <TextBox x:Name="IprodPrice" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
+                                    <TextBox x:Name="IprodQuantity" Text="1" Grid.Column="5" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
+                                    <TextBox x:Name="IprodTotalPrice" Text="0.00" Grid.Column="6" Margin="5 0 5 0" IsReadOnly="True" Style="{StaticResource TextBoxFilterBar}"/>
                                 </Grid>
                             </Grid>
 
@@ -333,7 +342,7 @@
 
                                 <TextBox x:Name="CardNumber" Grid.Column="0" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
-                                    <ComboBox x:Name="ExtDateYear" Width="100" Margin="5" Style="{StaticResource ComboBoxStyle}">
+                                    <ComboBox x:Name="ExtDateYear" SelectedIndex="0" Width="100" Margin="5" Style="{StaticResource ComboBoxStyle}">
                                         <ComboBoxItem Content="2024"/>
                                         <ComboBoxItem Content="2025"/>
                                         <ComboBoxItem Content="2026"/>
@@ -346,7 +355,7 @@
                                         <ComboBoxItem Content="2033"/>
                                         <ComboBoxItem Content="2034"/>
                                     </ComboBox>
-                                    <ComboBox x:Name="ExtDateMonth" Width="60" Margin="5" Style="{StaticResource ComboBoxStyle}">
+                                    <ComboBox x:Name="ExtDateMonth" SelectedIndex="0" Width="60" Margin="5" Style="{StaticResource ComboBoxStyle}">
                                         <ComboBoxItem Content="1"/>
                                         <ComboBoxItem Content="2"/>
                                         <ComboBoxItem Content="3"/>
@@ -363,7 +372,7 @@
                                 <TextBox x:Name="Cvv" Grid.Column="2" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
                                 <TextBox x:Name="CardOwnerId" Grid.Column="3" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
                                 <TextBox x:Name="CardOwnerName" Grid.Column="4" Margin="10" Style="{StaticResource TextBoxFilterBar}"/>
-                                <ComboBox x:Name="Payments" Grid.Column="5" Width="60" Margin="10" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyle}">
+                                <ComboBox x:Name="Payments" SelectedIndex="0" Grid.Column="5" Width="60" Margin="10" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyle}">
                                     <ComboBoxItem Content="1"/>
                                     <ComboBoxItem Content="2"/>
                                     <ComboBoxItem Content="3"/>
@@ -408,7 +417,7 @@
                                 <TextBlock Text="Branch number" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                                 <TextBlock Text="Bank number" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                                 <TextBlock Text="Cheque number" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Date" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Date - DD/MM/YYYY" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                                 <TextBlock Text="Cheque amount" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             </Grid>
                             <Separator Height="1" Grid.Row="1"  Background="#dae2ea" Margin="0 2 0 10"/>
@@ -548,16 +557,20 @@
 
                             <TextBlock Grid.Row="0" Text="Customer Details" HorizontalAlignment="Center" Margin="0 0 0 10" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
 
-                            <Grid Grid.Row="1" Margin="40 0 40 0">
+                            <Grid Grid.Row="1" Margin="0 0 40 0">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Name" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Phone" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <Button Grid.Row="1" Grid.Column="0" ToolTip="Customers List" Style="{StaticResource TopButton}" HorizontalAlignment="Left" Click="Button_ClickGetUser">
+                                    <Image Source="\Accets\CustomerIcon.png" Width="15" Height="15" />
+                                </Button>
+                                <TextBlock Text="Name" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Phone" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Customer Email" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             </Grid>
                             <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
 
@@ -591,7 +604,8 @@
 
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="5*"/>
                                     <ColumnDefinition Width="15*"/>
                                     <ColumnDefinition Width="6*"/>
@@ -602,11 +616,14 @@
                                 <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" ToolTip="New Line" HorizontalAlignment="Left" Click="Button_ClickNewProductLine">
                                     <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
                                 </Button>
-                                <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Description" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Price" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBlock Text="Total Price" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <Button Grid.Row="1" Grid.Column="1" ToolTip="Products List" Style="{StaticResource TopButton}" HorizontalAlignment="Left" Click="Button_ClickGetItem">
+                                    <Image Source="\Accets\CartIcon.png" Width="15" Height="15" />
+                                </Button>
+                                <TextBlock Text="Product ID" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Description" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Price" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text="Total Price" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                             </Grid>
                             <Separator Height="1" Grid.Row="2"  Background="#dae2ea" Margin="0 2 0 10"/>
 
@@ -617,7 +634,8 @@
 
                                 <Grid Grid.Row="0" Margin="0 0 0 5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="5*"/>
                                         <ColumnDefinition Width="15*"/>
                                         <ColumnDefinition Width="6*"/>
@@ -627,11 +645,11 @@
                                     <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" ToolTip="First Line Cannot Be Deleted!!" HorizontalAlignment="Left">
                                         <Image Source="\Accets\DeleteIcon.png" Width="15" Height="15" />
                                     </Button>
-                                    <TextBox x:Name="OprodID" Grid.Column="1" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                    <TextBox x:Name="OprodDescription" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
-                                    <TextBox x:Name="OprodPrice" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
-                                    <TextBox x:Name="OprodQuantity" Text="1" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
-                                    <TextBox x:Name="OprodTotalPrice" Text="0.00" Grid.Column="5" Margin="5 0 5 0" IsReadOnly="True" Style="{StaticResource TextBoxFilterBar}"/>
+                                    <TextBox x:Name="OprodID" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                                    <TextBox x:Name="OprodDescription" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                                    <TextBox x:Name="OprodPrice" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
+                                    <TextBox x:Name="OprodQuantity" Text="1" Grid.Column="5" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
+                                    <TextBox x:Name="OprodTotalPrice" Text="0.00" Grid.Column="6" Margin="5 0 5 0" IsReadOnly="True" Style="{StaticResource TextBoxFilterBar}"/>
                                 </Grid>
                             </Grid>
 
@@ -652,7 +670,7 @@
 
                     <!--Reports Structure-->
 
-                    <Grid x:Name="ReportsTable" Grid.Row="5" Style="{StaticResource HiddenStyle}">
+                    <Grid x:Name="ReportsTable" Grid.Row="5" Style="{StaticResource VisibleStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -679,8 +697,8 @@
                         </Grid>
 
                         <!--Documents Table-->
-                        
-                        <Grid x:Name="DocumentsTable" Grid.Row="1" Style="{StaticResource VisibleStyle}">
+
+                        <Grid x:Name="DocumentsTable" Visibility="Visible" Grid.Row="1" Style="{StaticResource HiddenStyle}">
                             <DataGrid x:Name="DocumentsData" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
                                 <DataGrid.Columns>
 
@@ -692,7 +710,7 @@
                                     <DataGridTextColumn Header="Is Deal Refunded?" IsReadOnly="True" Width="*" Binding="{Binding IsRefunded}"/>
                                     <DataGridTextColumn Header="Deal Number" IsReadOnly="True" Width="*" Binding="{Binding DealNumber}"/>
 
-                                    <DataGridTemplateColumn x:Name="DocActionRefund" Header="Actions" IsReadOnly="False" Width="auto">
+                                    <DataGridTemplateColumn x:Name="DocActionRefund" Visibility="Visible" Header="Actions" IsReadOnly="False" Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
@@ -710,7 +728,7 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
 
-                                    <DataGridTemplateColumn x:Name="DocActionReports" Header="Actions" Visibility="Collapsed" IsReadOnly="False" Width="auto">
+                                    <DataGridTemplateColumn x:Name="DocActionReports" Header="Actions" Visibility="Hidden" IsReadOnly="False" Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
@@ -730,25 +748,30 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
-                        
+
                         <!--Items Table-->
 
                         <Grid x:Name="ItemsTable" Grid.Row="1" Style="{StaticResource HiddenStyle}">
-                            
-                            <!--Add Item-->
-                            
-                            <DataGrid x:Name="ItemsData" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button ToolTip="New Product" Grid.Row="0" Style="{StaticResource TopButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Button_ClickCreateNewItem">
+                                <Image Source="\Accets\AddLineIcon.png" Width="15" Height="15" />
+                            </Button>
+                            <DataGrid x:Name="ItemsData" Grid.Row="1" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn Header="Item ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding ItemId}"/>
                                     <DataGridTextColumn Header="Item Name" IsReadOnly="True"  CanUserResize="False" Width="*" Binding="{Binding Name}"/>
                                     <DataGridTextColumn Header="Item Price" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>
-                                    
+
                                     <DataGridTemplateColumn Header="Actions" IsReadOnly="False" Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Style="{StaticResource GridShowButton}" ToolTip="Edit Item">
+                                                    <Button Style="{StaticResource GridShowButton}" ToolTip="Edit Item" Click="Button_ClickEditItem">
                                                         <Image Source="\Accets\EditIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
                                                     <Button Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Delete Item">
@@ -804,10 +827,104 @@
                         </StackPanel>
                     </Border>
 
-
-
                 </Grid>
 
+                <!--PopUp Window-->
+
+                <Popup x:Name="PopUpWindow" StaysOpen="False" IsOpen="False" PlacementTarget="{Binding ElementName=MainWindow}" 
+                   Placement="Center" HorizontalAlignment="Center" VerticalAlignment="Center" AllowsTransparency="True">
+
+                    <Border CornerRadius="30" BorderThickness="2" BorderBrush="#784ff2" ClipToBounds="True" Padding="10" Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Add Item-->
+
+                            <StackPanel x:Name="AddItemPop" Grid.Row="0" Visibility="Hidden" Orientation="Vertical" Width="500" Height="300" Background="White">
+                                <TextBlock Text="Add New Item :" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+
+                                <TextBlock Text="Description :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBox x:Name="NewItemDescription" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <TextBlock Text="Price :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBox x:Name="NewItemPrice" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <Separator Height="1" Background="#dae2ea" Margin="0 3 0 10"/>
+                                <Button x:Name="CreateItemBUT" Content="Create Item" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
+                            </StackPanel>
+
+                            <!--Edit Item-->
+
+                            <StackPanel x:Name="EditItemPop" Grid.Row="0" Visibility="Hidden" Orientation="Vertical" Width="500" Height="300" Background="White">
+                                <TextBlock Text="Edit Item :" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+
+                                <TextBlock Text="Description :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBox x:Name="EditItemDescription" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <TextBlock Text="Price :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBox x:Name="EditItemPrice" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <Separator Height="1" Background="#dae2ea" Margin="0 3 0 10"/>
+                                <Button x:Name="EditItemBUT" Content="Edit Item" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
+                            </StackPanel>
+
+                            <!--Get Item-->
+
+                            <StackPanel x:Name="GetItemPop" Grid.Row="0" Visibility="Hidden" Orientation="Vertical" Width="800" Height="350" Background="White">
+                                <TextBlock Text="Items List :" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+                                <Grid>
+                                    <DataGrid x:Name="ItemsPopData" Height="300" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"
+                                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                                        <DataGrid.Columns>
+
+                                            <DataGridTextColumn Header="Item Name" IsReadOnly="True"  CanUserResize="False" Width="*" Binding="{Binding Name}"/>
+                                            <DataGridTextColumn Header="Item Price" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>
+
+                                            <DataGridTemplateColumn Header="Actions" IsReadOnly="False" Width="auto">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Button Style="{StaticResource GridShowButton}" ToolTip="Edit Item" Click="Button_ClickEditItem">
+                                                                <Image Source="\Accets\EditIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--Get Customer-->
+
+                            <StackPanel x:Name="GetCustomerPop" Grid.Row="0" Visibility="Hidden" Orientation="Vertical" Width="800" Height="350" Background="White">
+                                <TextBlock Text="Customers List :" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+                                <Grid>
+                                    <DataGrid x:Name="CustomerPopData" Height="300" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"
+                                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                                        <DataGrid.Columns>
+
+                                            <DataGridTextColumn Header="Customer Name" IsReadOnly="True"  CanUserResize="False" Width="*" Binding="{Binding FullName}"/>
+                                            <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
+                                            <DataGridTextColumn Header="Phone Number" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+
+                                            <DataGridTemplateColumn Header="Actions" IsReadOnly="False" Width="auto">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Button Style="{StaticResource GridShowButton}" ToolTip="Create Document To Customer">
+                                                                <Image Source="\Accets\InvoiceIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Popup>
             </Grid>
         </Border>
     </ScrollViewer>
